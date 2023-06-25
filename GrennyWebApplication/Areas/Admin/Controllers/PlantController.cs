@@ -28,7 +28,7 @@ namespace Meridian_Web.Areas.Admin.Controllers
         }
         #region List
 
-        [HttpGet("list", Name = "admin-product-list")]
+        [HttpGet("list", Name = "admin-plant-list")]
         public async Task<IActionResult> ListAsync()
         {
             var model = await _dataContext.Plants.Select(p => new PlantListViewModel(
@@ -52,7 +52,7 @@ namespace Meridian_Web.Areas.Admin.Controllers
         #endregion
 
         #region Add
-        [HttpGet("add", Name = "admin-product-add")]
+        [HttpGet("add", Name = "admin-plant-add")]
         public async Task<IActionResult> AddAsync()
         {
             var model = new AddViewModel
@@ -68,7 +68,7 @@ namespace Meridian_Web.Areas.Admin.Controllers
             return View(model);
         }
 
-        [HttpPost("add", Name = "admin-product-add")]
+        [HttpPost("add", Name = "admin-plant-add")]
         public async Task<IActionResult> AddAsync(AddViewModel model)
         {
             if (!ModelState.IsValid)
@@ -113,6 +113,9 @@ namespace Meridian_Web.Areas.Admin.Controllers
             };
 
           
+
+
+
             await _dataContext.Plants.AddAsync(product);
 
             foreach (var catagoryId in model.CategoryIds)
@@ -138,18 +141,28 @@ namespace Meridian_Web.Areas.Admin.Controllers
                 await _dataContext.PlantTags.AddAsync(productTag);
             }
           
+            
+
+
+
             await _dataContext.Plants.AddAsync(product);
 
             await _dataContext.SaveChangesAsync();
 
-            return RedirectToRoute("admin-product-list");
+            return RedirectToRoute("admin-plant-list");
+
+
+
+
+
+
 
         }
 
         #endregion
 
         #region Update
-        [HttpGet("update/{id}", Name = "admin-product-update")]
+        [HttpGet("update/{id}", Name = "admin-plant-update")]
         public async Task<IActionResult> UpdateAsync([FromRoute] int id)
         {
             var product = await _dataContext.Plants
@@ -186,7 +199,7 @@ namespace Meridian_Web.Areas.Admin.Controllers
 
         }
 
-        [HttpPost("update/{id}", Name = "admin-product-update")]
+        [HttpPost("update/{id}", Name = "admin-plant-update")]
         public async Task<IActionResult> UpdateAsync(UpdateViewModel model)
         {
             var product = await _dataContext.Plants
@@ -378,7 +391,7 @@ namespace Meridian_Web.Areas.Admin.Controllers
             #endregion
             await _dataContext.SaveChangesAsync();
 
-            return RedirectToRoute("admin-product-list");
+            return RedirectToRoute("admin-plant-list");
 
 
 
@@ -414,7 +427,7 @@ namespace Meridian_Web.Areas.Admin.Controllers
         #endregion
 
         #region Delete
-        [HttpPost("delete/{id}", Name = "admin-product-delete")]
+        [HttpPost("delete/{id}", Name = "admin-plant-delete")]
         public async Task<IActionResult> DeleteAsync([FromRoute] int id)
         {
             var products = await _dataContext.Plants.FirstOrDefaultAsync(p => p.Id == id);
@@ -426,7 +439,7 @@ namespace Meridian_Web.Areas.Admin.Controllers
 
             _dataContext.Plants.Remove(products);
             await _dataContext.SaveChangesAsync();
-            return RedirectToRoute("admin-product-list");
+            return RedirectToRoute("admin-plant-list");
         }
         #endregion
     }

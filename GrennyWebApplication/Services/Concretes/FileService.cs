@@ -44,7 +44,6 @@ namespace GrennyWebApplication.Services.Concretes
         public async Task DeleteAsync(string? fileName, UploadDirectory uploadDirectory)
         {
             var deletePath = Path.Combine(GetUploadDirectory(uploadDirectory), fileName);
-
             await Task.Run(() => File.Delete(deletePath));
         }
 
@@ -66,6 +65,8 @@ namespace GrennyWebApplication.Services.Concretes
                     return Path.Combine(startPath, "rewards");
                 case UploadDirectory.Blog:
                     return Path.Combine(startPath, "blogs");
+                case UploadDirectory.Brand:
+                    return Path.Combine(startPath, "brands");
                 default:
                     throw new Exception("Something went wrong");
             }
@@ -94,6 +95,8 @@ namespace GrennyWebApplication.Services.Concretes
                     return $"{initialSegment}/rewards/{fileName}";
                 case UploadDirectory.Blog:
                     return $"{initialSegment}/blogs/{fileName}";
+                case UploadDirectory.Brand:
+                    return $"{initialSegment}/brands/{fileName}";
                 default:
                     throw new Exception("Something went wrong");
             }

@@ -1,9 +1,11 @@
-﻿using GrennyWebApplication.Areas.Client.ViewModels.Home;
-using GrennyWebApplication.Areas.Client.ViewModels.Home.Index;
+﻿using GrennyWebApplication.Areas.Client.ViewModels.Home.Index;
+//using GrennyWebApplication.Areas.Client.ViewModels.Home.Modal;
+
 using GrennyWebApplication.Contracts.File;
 using GrennyWebApplication.Database;
 using GrennyWebApplication.Database.Models;
 using GrennyWebApplication.Services.Abstracts;
+//using GrennyWebApplication.Services.Concretes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,39 +29,6 @@ namespace GrennyWebApplication.Areas.Client.Controllers
         [HttpGet("index")]
         public async  Task<IActionResult> IndexAsync()
         {
-
-            var model = new IndexViewModel
-            {
-
-                Sliders = await _dbContext.Sliders.OrderBy(s => s.Order).Select(b => new SliderLIstItemViewModel(
-                    b.Title,
-                    b.OfferContext,
-                    b.Content,
-                    b.ButtonName,
-                    _fileService.GetFileUrl(b.BgImageNameInFileSystem, UploadDirectory.Slider),
-                    b.BtnRedirectUrl,
-                    b.Order
-
-                    ))
-               .ToListAsync(),
-
-                Categories = await _dbContext.Categories
-               .Select(c => new CategoryViewModel(c.Id, c.Title,
-               c.Catagories.Select(s => new SubCategoryViewModel(s.Id, s.Title)).ToList())).ToListAsync(),
-
-                FeedBacks = await _dbContext.FeedBacks.Select(f => new FeedBackListItemViewModel(
-                    f.Id,
-                    f.FullName,
-                    f.Context,
-                    f.Role,
-                   _fileService.GetFileUrl(f.ProfilePhoteInFileSystem, UploadDirectory.FeedBack)
-
-                    ))
-                .ToListAsync(),
-            };
-            return View(model);
-
-
             //var model = new IndexViewModel
             //{
 
@@ -75,44 +44,44 @@ namespace GrennyWebApplication.Areas.Client.Controllers
             //        ))
             //    .ToListAsync(),
 
-            //Payments=await _dbContext.Payments.Select(p=>new PaymmentLIstItemViewModel(
-            //    p.Id,
-            //    p.Title,
-            //    p.Context,
-            //    _fileService.GetFileUrl(p.ImageNameInFileSystem,UploadDirectory.Payment)
-            //        ))
-            //   .ToListAsync(),
+                //Payments=await _dbContext.Payments.Select(p=>new PaymmentLIstItemViewModel(
+                //    p.Id,
+                //    p.Title,
+                //    p.Context,
+                //    _fileService.GetFileUrl(p.ImageNameInFileSystem,UploadDirectory.Payment)
+                //        ))
+                //   .ToListAsync(),
 
-            //FeedBacks=await _dbContext.FeedBacks.Select(f=>new FeedBackListItemViewModel(
-            //    f.Id,
-            //    f.FullName,
-            //    f.Context,
-            //    f.Role,
-            //   _fileService.GetFileUrl(f.ProfilePhoteInFileSystem, UploadDirectory.FeedBack)
+                //FeedBacks=await _dbContext.FeedBacks.Select(f=>new FeedBackListItemViewModel(
+                //    f.Id,
+                //    f.FullName,
+                //    f.Context,
+                //    f.Role,
+                //   _fileService.GetFileUrl(f.ProfilePhoteInFileSystem, UploadDirectory.FeedBack)
 
-            //    ))
-            //.ToListAsync(),
+                //    ))
+                //.ToListAsync(),
 
-            //Rewards=await _dbContext.Rewards.Select(r=>new RewardLIstItemViewModel(
-            //    r.Id,
-            //    _fileService.GetFileUrl(r.BgImageNameInFileSystem,UploadDirectory.Reward)
-            //    ))
-            //.ToListAsync(),
+                //Rewards=await _dbContext.Rewards.Select(r=>new RewardLIstItemViewModel(
+                //    r.Id,
+                //    _fileService.GetFileUrl(r.BgImageNameInFileSystem,UploadDirectory.Reward)
+                //    ))
+                //.ToListAsync(),
 
-            //Blogs=await _dbContext.Blogs.Include(b=>b.BlogFile).Select(b=>new BlogListItemViewModel(
-            //b.Id,
-            //b.Title,
-            //b.Description,
+                //Blogs=await _dbContext.Blogs.Include(b=>b.BlogFile).Select(b=>new BlogListItemViewModel(
+                //b.Id,
+                //b.Title,
+                //b.Description,
+                
+                //b.BlogFile!.Take(1).FirstOrDefault() != null
+                //? _fileService.GetFileUrl(b.BlogFile.Take(1).FirstOrDefault()!.FileNameInFileSystem, UploadDirectory.Blog)
+                //: String.Empty,
+                //b.BlogFile.FirstOrDefault().IsShowImage,
+                //b.BlogFile.FirstOrDefault().IsShowVideo,
+                //b.CreatedAt
 
-            //b.BlogFile!.Take(1).FirstOrDefault() != null
-            //? _fileService.GetFileUrl(b.BlogFile.Take(1).FirstOrDefault()!.FileNameInFileSystem, UploadDirectory.Blog)
-            //: String.Empty,
-            //b.BlogFile.FirstOrDefault().IsShowImage,
-            //b.BlogFile.FirstOrDefault().IsShowVideo,
-            //b.CreatedAt
-
-            //    ))
-            //.ToListAsync(),
+                //    ))
+                //.ToListAsync(),
 
 
             //};
