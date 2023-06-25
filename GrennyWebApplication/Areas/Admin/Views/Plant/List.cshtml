@@ -19,26 +19,32 @@
                 <table class="table table-striped mb-0">
                     <thead>
                         <tr>
-                            @*<th>Image</th>*@
-                            <th>Name</th>
-                            <th>Price</th>
+                            <th>Title</th>
                             <th>Description</th>
-                            <th>Catagory</th>
-                            <th>Created at</th>
-                            <th class="text-end">Actions</th>
+                            <th>Price</th>
+                            <th>Discount Price</th>
+                            <th>Stock</th>
+                            <th>Brands</th>
+                            <th>Tags</th>
+                            <th>Categories</th>
+                            <th>Discount</th>
+                            <th>Created</th>
+                            <th>Updated</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var plant in Model)
                         {
                             <tr>
-                                @*<td>
-                            <img width="20%" src="~/@book.ImageUrl"/>
-                            </td>*@
                                 <td>@plant.Name</td>
-                                <td>@plant.Price</td>
                                 <td>@plant.Description</td>
-                                <td>@string.Join(", ", plant.Categories.Select(c => $"{c.Title}->{c.ParentTitle}"))</td>
+                                <td>@plant.Price</td>
+                                <td>@plant.DiscountPrice</td>
+                                <td>@plant.InStock</td>
+                                <td>@string.Join( " and  ", plant.Brands.Select(c => $"{c.Title}"))</td>
+                                <td>@string.Join( " and  ", plant.Categories.Select(c => $"{c.Title}"))</td>
+                                <td>@string.Join( " and  ", plant.Tags.Select(c => $"{c.Title}"))</td>
+                                <td>@string.Join( " and  ", plant.Discounts.Select(c => $"{c.Title}"))</td>
                                 <td>@plant.CreatedAt.ToString("dd/MM/yyyy")</td>
                                 <td class="text-end">
 

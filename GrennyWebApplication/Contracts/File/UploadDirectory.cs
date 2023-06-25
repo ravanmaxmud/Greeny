@@ -8,5 +8,6 @@
         FeedBack= 8,
         Reward= 16,
         Blog= 32,
+        Brand=64,
     }
 }
