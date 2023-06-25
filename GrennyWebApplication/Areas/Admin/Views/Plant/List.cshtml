@@ -1,0 +1,59 @@
+﻿@using GrennyWebApplication.Areas.Admin.ViewModels.Plant
+
+@model List<PlantListViewModel>
+
+<div class="col-lg-12">
+    <div class="row justify-content-end">
+        <div class="">
+            <a asp-route="admin-plant-add" class="btn btn-secondary">Add new Plant</a>
+        </div>
+    </div>
+</div>
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Books</h4>
+        </div><!--end card-header-->
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped mb-0">
+                    <thead>
+                        <tr>
+                            @*<th>Image</th>*@
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Description</th>
+                            <th>Catagory</th>
+                            <th>Created at</th>
+                            <th class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var plant in Model)
+                        {
+                            <tr>
+                                @*<td>
+                            <img width="20%" src="~/@book.ImageUrl"/>
+                            </td>*@
+                                <td>@plant.Name</td>
+                                <td>@plant.Price</td>
+                                <td>@plant.Description</td>
+                                <td>@string.Join(", ", plant.Categories.Select(c => $"{c.Title}->{c.ParentTitle}"))</td>
+                                <td>@plant.CreatedAt.ToString("dd/MM/yyyy")</td>
+                                <td class="text-end">
+
+                                    <a class="btn btn-success" asp-route="admin-plant-update" asp-route-id="@plant.Id">Update Product</a>
+                                    <form method="POST" asp-route="admin-plant-delete" asp-route-id="@plant.Id" id="book-form-@plant.Id"></form>
+                                    <button class="btn btn-danger" type="submit" form="book-form-@plant.Id">
+                                        Delete Product
+                                    </button>
+                                    <a class="btn btn-primary" asp-route="admin-plantimg-list" asp-route-plantId="@plant.Id">ProductImageList</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table><!--end /table-->
+            </div><!--end /tableresponsive-->
+        </div><!--end card-body-->
+    </div><!--end card-->
+</div>

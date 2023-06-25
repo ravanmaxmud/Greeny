@@ -1,0 +1,54 @@
+﻿@using GrennyWebApplication.Areas.Admin.ViewModels.Order
+
+
+@model List<ListOrderViewModel>
+
+<div class="col-lg-12">
+    <div class="row justify-content-end">
+        <div class="">
+         
+        </div>
+    </div>
+</div>
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Orders</h4>
+        </div><!--end card-header-->
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th>OrderCode</th>
+                            <th>Status</th>
+                            <th>Total</th>
+                            <th>CreatedAt</th>
+                            <th>UpdatedAt</th>
+                            <th class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var order in Model)
+                        {
+                            <tr>
+                                <td>@order.Id</td>
+                                <td>@order.Status</td>
+                                <td>@order.Total</td>
+                                <td>@order.CreatedAt.ToString("dd/MM/yyyy")</td>
+                                <td>@order.UpdatedAt.ToString("dd/MM/yyyy")</td>
+                                <td class="text-end">
+                                    <a asp-route="admin-order-update" asp-route-id="@order.Id"><i class="las la-pen text-secondary font-16"></i></a>
+                                    <form method="POST" asp-route="admin-order-delete" asp-route-id="@order.Id" id="book-form-@order.Id"></form>
+                                    <button type="submit" form="book-form-@order.Id">
+                                        <i class="las la-trash-alt text-secondary font-16"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table><!--end /table-->
+            </div><!--end /tableresponsive-->
+        </div><!--end card-body-->
+    </div><!--end card-->
+</div>
