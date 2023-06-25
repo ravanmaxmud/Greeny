@@ -1,111 +1,51 @@
-﻿
-@model IndexViewModel
+﻿@model IndexViewModel
 
 <section class="home-index-slider slider-arrow slider-dots">
-    <div class="banner-part banner-1">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6 col-lg-6">
-                    <div class="banner-content">
-                        <h1>free home delivery within 24 hours now.</h1>
-                        <p>
-                            Lorem ipsum dolor consectetur adipisicing elit modi consequatur eaque expedita porro
-                            necessitatibus eveniet voluptatum quis pariatur Laboriosam molestiae architecto
-                            excepturi
-                        </p>
-                        <div class="banner-btn">
-                            <a class="btn btn-inline" href="shop-4column.html">
-                                <i class="fas fa-shopping-basket"></i><span>shop now</span>
-                            </a><a class="btn btn-outline" href="offer.html">
-                                <i class="icofont-sale-discount"></i><span>get offer</span>
-                            </a>
+    @foreach (var item in Model.Sliders)
+    {
+        <div class="banner-part banner-1">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6 col-lg-6">
+                        <div class="banner-content">
+                            <h1>@item.Title</h1>
+                            <p>
+                                @item.Content
+                            </p>
+                            <div class="banner-btn">
+                                <a class="btn btn-inline" href="@item.ButtonRedirectUrl">
+                                    <i class="fas fa-shopping-basket"></i><span>@item.ButtonName</span>
+                                </a><a class="btn btn-outline" href="offer.html">
+                                    <i class="icofont-sale-discount"></i><span>@item.OfferContext</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-6">
-                    <div class="banner-img"><img src="~/client/assets/images/home/index/01.png" alt="index"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="banner-part banner-2">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6 col-lg-6">
-                    <div class="banner-img"><img src="~/client/assets/images/home/index/02.png" alt="index"></div>
-                </div>
-                <div class="col-md-6 col-lg-6">
-                    <div class="banner-content">
-                        <h1>free home delivery within 24 hours now.</h1>
-                        <p>
-                            Lorem ipsum dolor consectetur adipisicing elit modi consequatur eaque expedita porro
-                            necessitatibus eveniet voluptatum quis pariatur Laboriosam molestiae architecto
-                            excepturi
-                        </p>
-                        <div class="banner-btn">
-                            <a class="btn btn-inline" href="shop-4column.html">
-                                <i class="fas fa-shopping-basket"></i><span>shop now</span>
-                            </a><a class="btn btn-outline" href="offer.html">
-                                <i class="icofont-sale-discount"></i><span>get offer</span>
-                            </a>
-                        </div>
+                    <div class="col-md-6 col-lg-6">
+                        <div class="banner-img"><img src="~/@item.ImageUrl" alt="index"></div>
                     </div>
                 </div>
+
             </div>
         </div>
-    </div>
+    }
 </section>
+
 <section class="section suggest-part">
     <div class="container">
         <ul class="suggest-slider slider-arrow">
-            <li>
-                <a class="suggest-card" href="shop-4column.html">
-                    <img src="~/client/assets/images/suggest/01.jpg" alt="suggest">
-                    <h5>vegetables <span>34 items</span></h5>
-                </a>
-            </li>
-            <li>
-                <a class="suggest-card" href="shop-4column.html">
-                    <img src="~/client/assets/images/suggest/02.jpg" alt="suggest">
-                    <h5>fruits <span>89 items</span></h5>
-                </a>
-            </li>
-            <li>
-                <a class="suggest-card" href="shop-4column.html">
-                    <img src="~/client/assets/images/suggest/03.jpg" alt="suggest">
-                    <h5>groceries <span>45 items</span></h5>
-                </a>
-            </li>
-            <li>
-                <a class="suggest-card" href="shop-4column.html">
-                    <img src="~/client/assets/images/suggest/04.jpg" alt="suggest">
-                    <h5>dairy farm <span>83 items</span></h5>
-                </a>
-            </li>
-            <li>
-                <a class="suggest-card" href="shop-4column.html">
-                    <img src="~/client/assets/images/suggest/05.jpg" alt="suggest">
-                    <h5>sea foods <span>40 items</span></h5>
-                </a>
-            </li>
-            <li>
-                <a class="suggest-card" href="shop-4column.html">
-                    <img src="~/client/assets/images/suggest/06.jpg" alt="suggest">
-                    <h5>vegan foods <span>57 items</span></h5>
-                </a>
-            </li>
-            <li>
-                <a class="suggest-card" href="shop-4column.html">
-                    <img src="~/client/assets/images/suggest/07.jpg" alt="suggest">
-                    <h5>dry foods <span>23 items</span></h5>
-                </a>
-            </li>
-            <li>
-                <a class="suggest-card" href="shop-4column.html">
-                    <img src="~/client/assets/images/suggest/08.jpg" alt="suggest">
-                    <h5>fast foods <span>97 items</span></h5>
-                </a>
-            </li>
+
+            @foreach (var item in Model.Categories)
+            {
+                <li>
+                    <a class="suggest-card" href="shop-4column.html">
+                        <img src="~/client/assets/images/suggest/01.jpg" alt="suggest">
+                        <h5>@item.Title <span>34 items</span></h5>
+                    </a>
+                </li>
+            }
+
+
         </ul>
     </div>
 </section>
@@ -2282,66 +2222,26 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="testimonial-slider slider-arrow">
-                    <div class="testimonial-card">
-                        <i class="fas fa-quote-left"></i>
-                        <p>
-                            Lorem ipsum dolor consectetur adipisicing elit neque earum sapiente vitae obcaecati
-                            magnam doloribus magni provident ipsam
-                        </p>
-                        <h5>mahmud hasan</h5>
-                        <ul>
-                            <li class="fas fa-star"></li>
-                            <li class="fas fa-star"></li>
-                            <li class="fas fa-star"></li>
-                            <li class="fas fa-star"></li>
-                            <li class="fas fa-star"></li>
-                        </ul><img src="~/client/assets/images/avatar/01.jpg" alt="testimonial">
-                    </div>
-                    <div class="testimonial-card">
-                        <i class="fas fa-quote-left"></i>
-                        <p>
-                            Lorem ipsum dolor consectetur adipisicing elit neque earum sapiente vitae obcaecati
-                            magnam doloribus magni provident ipsam
-                        </p>
-                        <h5>mahmud hasan</h5>
-                        <ul>
-                            <li class="fas fa-star"></li>
-                            <li class="fas fa-star"></li>
-                            <li class="fas fa-star"></li>
-                            <li class="fas fa-star"></li>
-                            <li class="fas fa-star"></li>
-                        </ul><img src="~/client/assets/images/avatar/02.jpg" alt="testimonial">
-                    </div>
-                    <div class="testimonial-card">
-                        <i class="fas fa-quote-left"></i>
-                        <p>
-                            Lorem ipsum dolor consectetur adipisicing elit neque earum sapiente vitae obcaecati
-                            magnam doloribus magni provident ipsam
-                        </p>
-                        <h5>mahmud hasan</h5>
-                        <ul>
-                            <li class="fas fa-star"></li>
-                            <li class="fas fa-star"></li>
-                            <li class="fas fa-star"></li>
-                            <li class="fas fa-star"></li>
-                            <li class="fas fa-star"></li>
-                        </ul><img src="~/client/assets/images/avatar/03.jpg" alt="testimonial">
-                    </div>
-                    <div class="testimonial-card">
-                        <i class="fas fa-quote-left"></i>
-                        <p>
-                            Lorem ipsum dolor consectetur adipisicing elit neque earum sapiente vitae obcaecati
-                            magnam doloribus magni provident ipsam
-                        </p>
-                        <h5>mahmud hasan</h5>
-                        <ul>
-                            <li class="fas fa-star"></li>
-                            <li class="fas fa-star"></li>
-                            <li class="fas fa-star"></li>
-                            <li class="fas fa-star"></li>
-                            <li class="fas fa-star"></li>
-                        </ul><img src="~/client/assets/images/avatar/04.jpg" alt="testimonial">
-                    </div>
+
+                    @foreach (var item in Model.FeedBacks)
+                    {
+                        <div class="testimonial-card">
+                            <i class="fas fa-quote-left"></i>
+                            <p>
+                                @item.Context
+                            </p>
+                            <h5>@item.FullName</h5>
+                            <ul>
+                                <li class="fas fa-star"></li>
+                                <li class="fas fa-star"></li>
+                                <li class="fas fa-star"></li>
+                                <li class="fas fa-star"></li>
+                                <li class="fas fa-star"></li>
+                            </ul><img src="~/@item.ImageUrl" alt="testimonial">
+                        </div>
+                    }
+
+
                 </div>
             </div>
         </div>

@@ -1,0 +1,20 @@
+﻿@using GrennyWebApplication.Areas.Client.ViewModels.Home;
+@model List<CategoryViewModel>
+
+@foreach (var item in Model)
+{
+    <div class="col">
+        <div class="megamenu-wrap">
+            <h5 class="megamenu-title">@item.Title</h5>
+            <ul class="megamenu-list">
+                @foreach (var Sub in item.SubCategories)
+                {
+                    <li><a href="#">@Sub.SubName</a></li>
+
+                }
+
+            </ul>
+        </div>
+    </div>
+
+}
