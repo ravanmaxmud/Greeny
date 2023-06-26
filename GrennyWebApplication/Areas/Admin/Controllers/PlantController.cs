@@ -136,6 +136,8 @@ namespace Meridian_Web.Areas.Admin.Controllers
                 Content = model.Description,
                 Price = model.Price,
                 InStock = model.InStock,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
             };
 
             if (model.DicountIds != null)

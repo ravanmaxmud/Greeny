@@ -7,6 +7,7 @@
         //public List<PaymmentLIstItemViewModel> Payments { get; set; }
         //public List<PlantListItemViewModel> Plants { get; set; }
         public List<FeedBackListItemViewModel> FeedBacks { get; set; }
+        public List<PlantViewModel> Plants { get; set; }
 
     }
 }
