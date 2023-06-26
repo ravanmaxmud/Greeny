@@ -5,7 +5,7 @@
         public List<SliderLIstItemViewModel> Sliders { get; set; }
         public List<CategoryViewModel> Categories { get; set; }
         //public List<PaymmentLIstItemViewModel> Payments { get; set; }
-        //public List<PlantListItemViewModel> Plants { get; set; }
+        public List<GlobalOfferViewModel> GlobalOffers { get; set; }
         public List<FeedBackListItemViewModel> FeedBacks { get; set; }
         public List<PlantViewModel> Plants { get; set; }
 
