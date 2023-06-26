@@ -39,12 +39,12 @@
                                 <td>@blog.CreatedAt.ToString("dd/MM/yyyy")</td>
                                 <td class="text-end">
 
-                                    <a class="btn btn-success" asp-route="admin-blog-update" asp-route-id="@blog.Id">Update Product</a>
+                                    <a class="btn btn-success" asp-route="admin-blog-update" asp-route-id="@blog.Id">Update Blog</a>
                                     <form method="POST" asp-route="admin-blog-delete" asp-route-id="@blog.Id" id="book-form-@blog.Id"></form>
                                     <button class="btn btn-danger" type="submit" form="book-form-@blog.Id">
-                                        Delete Product
+                                        Delete Blog
                                     </button>
-                                    <a class="btn btn-primary" asp-route="admin-blogfile-list" asp-route-blogId="@blog.Id">ProductImageList</a>
+                                    <a class="btn btn-primary" asp-route="admin-blogfile-list" asp-route-blogId="@blog.Id">BlogImageList</a>
                                 </td>
                             </tr>
                         }

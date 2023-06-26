@@ -61,12 +61,14 @@ namespace GrennyWebApplication.Services.Concretes
                     return Path.Combine(startPath, "payments");
                 case UploadDirectory.FeedBack:
                     return Path.Combine(startPath, "feedbacks");
-                case UploadDirectory.Reward:
-                    return Path.Combine(startPath, "rewards");
+                case UploadDirectory.City:
+                    return Path.Combine(startPath, "cities");
                 case UploadDirectory.Blog:
                     return Path.Combine(startPath, "blogs");
                 case UploadDirectory.Brand:
                     return Path.Combine(startPath, "brands");
+                case UploadDirectory.TeamMember:
+                    return Path.Combine(startPath, "teammembers");
                 default:
                     throw new Exception("Something went wrong");
             }
@@ -91,12 +93,14 @@ namespace GrennyWebApplication.Services.Concretes
                     return $"{initialSegment}/payments/{fileName}";
                 case UploadDirectory.FeedBack:
                     return $"{initialSegment}/feedbacks/{fileName}";
-                case UploadDirectory.Reward:
-                    return $"{initialSegment}/rewards/{fileName}";
+                case UploadDirectory.City:
+                    return $"{initialSegment}/cities/{fileName}";
                 case UploadDirectory.Blog:
                     return $"{initialSegment}/blogs/{fileName}";
                 case UploadDirectory.Brand:
                     return $"{initialSegment}/brands/{fileName}";
+                case UploadDirectory.TeamMember:
+                    return $"{initialSegment}/teammembers/{fileName}";
                 default:
                     throw new Exception("Something went wrong");
             }

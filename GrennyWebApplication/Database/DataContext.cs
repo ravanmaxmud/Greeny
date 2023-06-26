@@ -13,7 +13,8 @@ namespace GrennyWebApplication.Database
         {
 
         }
-
+        public DbSet<City> Cities { get; set; }
+        public DbSet<TeamMember> TeamMembers { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<PlantBrand> PlantBrands { get; set; }
         public DbSet<Discont> Disconts { get; set; }
