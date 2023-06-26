@@ -1,12 +1,12 @@
 ﻿using GrennyWebApplication.Areas.Client.ViewModels.Home;
 using GrennyWebApplication.Areas.Client.ViewModels.Home.Index;
-//using GrennyWebApplication.Areas.Client.ViewModels.Home.Modal;
+
 
 using GrennyWebApplication.Contracts.File;
 using GrennyWebApplication.Database;
 using GrennyWebApplication.Database.Models;
 using GrennyWebApplication.Services.Abstracts;
-//using GrennyWebApplication.Services.Concretes;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -56,10 +56,12 @@ namespace GrennyWebApplication.Areas.Client.Controllers
                    _fileService.GetFileUrl(f.ProfilePhoteInFileSystem, UploadDirectory.FeedBack)
                     ))
                       .ToListAsync(),
+
                 GlobalOffers = await _dbContext.Disconts.Take(1).Select(go => new GlobalOfferViewModel(
                        go.Title,
                        go.DiscountTime)).ToListAsync(),
                 Plants = await _dbContext.Plants.Select(p => new PlantViewModel(p.Id, p.Title, p.Price, p.DiscountPrice, p.Content)).ToListAsync(),
+
 
             };
             return View(model);
