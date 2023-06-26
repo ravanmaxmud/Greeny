@@ -14,12 +14,12 @@
 
                         <div class="form-group">
                             <label>Brands</label>
-                            <select asp-for="CategoryIds" asp-items="@(new SelectList(Model.Brands, nameof(BrandListItemViewModel.Id), nameof(BrandListItemViewModel.Title)))" class="form-select"></select>
+                            <select asp-for="BrandIds" asp-items="@(new SelectList(Model.Brands, nameof(BrandListItemViewModel.Id), nameof(BrandListItemViewModel.Title)))" class="form-select"></select>
                             <span asp-validation-for="CategoryIds" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label>Discount</label>
-                            <select asp-for="CategoryIds" asp-items="@(new SelectList(Model.Discounts, nameof(DiscountListViewModel.Id), nameof(DiscountListViewModel.Title)))" class="form-select"></select>
+                            <select asp-for="DicountIds" asp-items="@(new SelectList(Model.Discounts, nameof(DiscountListViewModel.Id), nameof(DiscountListViewModel.Title)))" class="form-select"></select>
                             <span asp-validation-for="CategoryIds" class="text-danger"></span>
                         </div>
                         <div class="form-group">

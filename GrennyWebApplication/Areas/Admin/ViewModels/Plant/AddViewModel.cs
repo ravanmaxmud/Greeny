@@ -10,17 +10,15 @@ namespace GrennyWebApplication.Areas.Admin.ViewModels.Plant
 
         [Required]
         public int InStock { get; set; }
-        [Required]
-        public List<int> CategoryIds { get; set; }
+        
+        public List<int>? CategoryIds { get; set; }
 
-        [Required]
-        public List<int> TagIds { get; set; }
-        [Required]
-        public List<int> BrandIds { get; set; }
-        [Required]
-        public List<int> DicountIds { get; set; }
-
-
+        
+        public List<int>? TagIds { get; set; }
+        
+        public List<int>? BrandIds { get; set; }
+        
+        public List<int>? DicountIds { get; set; }
 
         [Required]
         public string Description { get; set; }

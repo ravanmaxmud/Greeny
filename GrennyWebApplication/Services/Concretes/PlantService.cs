@@ -3,6 +3,7 @@ using GrennyWebApplication.Database;
 using GrennyWebApplication.Database.Models;
 using GrennyWebApplication.Services.Abstracts;
 using Microsoft.EntityFrameworkCore;
+using static Org.BouncyCastle.Asn1.Cmp.Challenge;
 
 namespace GrennyWebApplication.Services.Concretes
 {
@@ -29,7 +30,11 @@ namespace GrennyWebApplication.Services.Concretes
 
             model.Tags = await _dataContext.Tags
              .Select(c => new TagListItemViewModel(c.Id, c.TagName))
-             .ToListAsync();
+            .ToListAsync();
+
+            model.Brands = await _dataContext.Brands.Select(b => new BrandListItemViewModel(b.Id, b.Name)).ToListAsync();
+
+            model.Discounts = await _dataContext.Disconts.Select(d => new DiscountListViewModel(d.Id, d.Title)).ToListAsync();
 
 
             return model;

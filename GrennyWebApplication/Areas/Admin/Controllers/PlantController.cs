@@ -60,9 +60,10 @@ namespace Meridian_Web.Areas.Admin.Controllers
                 Categories = await _dataContext.Categories
                     .Select(c => new CatagoryListItemViewModel(c.Id, c.Title))
                     .ToListAsync(),
-              
+
                 Tags = await _dataContext.Tags.Select(t => new TagListItemViewModel(t.Id, t.TagName)).ToListAsync(),
-                
+                Brands = await _dataContext.Brands.Select(b => new BrandListItemViewModel(b.Id, b.Name)).ToListAsync(),
+                Discounts = await _dataContext.Disconts.Select(d => new DiscountListViewModel(d.Id, d.Title)).ToListAsync()
             };
 
             return View(model);
@@ -88,7 +89,32 @@ namespace Meridian_Web.Areas.Admin.Controllers
                 }
 
             }
-           
+            foreach (var brandId in model.BrandIds)
+            {
+                if (!await _dataContext.Brands.AnyAsync(c => c.Id == brandId))
+                {
+                    ModelState.AddModelError(string.Empty, "Something went wrong");
+                    _logger.LogWarning($"Brand with id({brandId}) not found in db ");
+                    model = await _productService.GetViewForModel(model);
+                    return View(model);
+                }
+
+            }
+            if (model.Discounts != null)
+            {
+                foreach (var discountId in model.DicountIds)
+                {
+                    if (!await _dataContext.Disconts.AnyAsync(c => c.Id == discountId))
+                    {
+                        ModelState.AddModelError(string.Empty, "Something went wrong");
+                        _logger.LogWarning($"Brand with id({discountId}) not found in db ");
+                        model = await _productService.GetViewForModel(model);
+                        return View(model);
+                    }
+
+                }
+
+            }
 
 
             foreach (var tagId in model.TagIds)
@@ -112,7 +138,29 @@ namespace Meridian_Web.Areas.Admin.Controllers
                 InStock = model.InStock,
             };
 
-          
+            if (model.DicountIds != null)
+            {
+                var discounts = await _dataContext.PlantDisconts.Select(d => d.DiscontId).ToListAsync();
+                var items = discounts.Intersect(model.DicountIds).ToList();
+
+
+                foreach (var item in items)
+                {
+                    var discasount = await _dataContext.Disconts.FirstOrDefaultAsync(pd => pd.Id == item);
+                    if (discasount != null)
+                    {
+                        decimal discountPercentage = discasount.DiscontPers;
+                        var sum = (product.Price * discasount.DiscontPers) / 100;
+                        product.DiscountPrice = product.Price - sum;
+                    }
+                    else
+                    {
+                        product.DiscountPrice = null;
+                    }
+
+                }
+
+            }
 
 
 
@@ -140,8 +188,32 @@ namespace Meridian_Web.Areas.Admin.Controllers
 
                 await _dataContext.PlantTags.AddAsync(productTag);
             }
-          
-            
+            foreach (var brandId in model.BrandIds)
+            {
+                var productBrand = new PlantBrand
+                {
+                    BrandId = brandId,
+                    Plant = product,
+                };
+
+                await _dataContext.PlantBrands.AddAsync(productBrand);
+            }
+
+            if (model.DicountIds != null)
+            {
+
+                foreach (var discountId in model.DicountIds)
+                {
+                    var productDiscount = new PlantDiscont
+                    {
+                        DiscontId = discountId,
+                        Plant = product,
+                    };
+
+                    await _dataContext.PlantDisconts.AddAsync(productDiscount);
+                }
+
+            }
 
 
 
