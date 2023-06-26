@@ -10,7 +10,7 @@ namespace GrennyWebApplication.Database.Models
         public int PlantId { get; set; }
         public Plant? Plant { get; set; }
 
-        public int Quantity { get; set; }
+        public int? Quantity { get; set; }
 
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }

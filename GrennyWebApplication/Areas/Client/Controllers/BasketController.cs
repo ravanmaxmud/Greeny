@@ -25,6 +25,10 @@ namespace GrennyWebApplication.Areas.Client.Controllers
         [HttpPost("add/{id}", Name = "client-basket-add")]
         public async Task<IActionResult> AddProduct([FromRoute] int id, ProductCookieViewModel model)
         {
+            if (!_userService.IsAuthenticated)
+            {
+                return BadRequest("Login");
+            }
             var plant = await _dataContext.Plants.Include(p => p.PlantImages).FirstOrDefaultAsync(p=> p.Id == id);
 
             if (plant is null)
@@ -37,6 +41,24 @@ namespace GrennyWebApplication.Areas.Client.Controllers
                 return ViewComponent(nameof(MiniBasket), productCookiViewModel);
             }
             return ViewComponent(nameof(MiniBasket), plant);
+        }
+        [HttpPost("basket-delete/{productId}", Name = "client-basket-delete")]
+        public async Task<IActionResult> DeleteProduct([FromRoute] int productId)
+        {
+            var productCookieViewModel = new List<ProductCookieViewModel>();
+
+                var basketProduct = await _dataContext.BasketProducts
+                   .Include(b => b.Basket).FirstOrDefaultAsync(bp => bp.Basket.UserId == _userService.CurrentUser.Id && bp.Id == productId);
+
+                if (basketProduct is null)
+                {
+                    return NotFound();
+                }
+                _dataContext.BasketProducts.Remove(basketProduct);
+            
+
+            await _dataContext.SaveChangesAsync();
+            return ViewComponent(nameof(MiniBasket), productCookieViewModel);
         }
     }
 }

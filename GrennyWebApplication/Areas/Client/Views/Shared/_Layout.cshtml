@@ -1,4 +1,5 @@
-﻿﻿@using GrennyWebApplication.Services.Abstracts
+﻿
+@using GrennyWebApplication.Services.Abstracts
 @inject IUserService userService
 @using GrennyWebApplication.Areas.Client.ViewComponents;
 
@@ -100,10 +101,29 @@
                     <a href="compare.html" class="header-widget" title="Compare List">
                         <i class="fas fa-random"></i><sup>0</sup>
                     </a><a href="wishlist.html" class="header-widget"
-                           title="Wishlist"><i class="fas fa-heart"></i><sup>0</sup></a><button class="header-widget header-cart" title="Cartlist">
-                        <i class="fas fa-shopping-basket"></i><sup>9+</sup><span>
-                            total
-                            price<small>$345.00</small>
+                           title="Wishlist"><i class="fas fa-heart"></i><sup>0</sup></a>
+
+                           <button class="header-widget header-cart" title="Cartlist">
+                        <i class="fas fa-shopping-basket"></i>
+                     @*    @if (userService.IsAuthenticated)
+                        {
+                            if (userService.CurrentUser.Basket.BasketProducts.ToList() != null)
+                            {
+                                <sup>@userService.CurrentUser.Basket.BasketProducts.Count()</sup>
+                            }
+                            else
+                            {
+                                <sup>0</sup>
+                            }
+                          
+                        }*@
+                    @*    else
+                        {
+                            <sup>0</sup>
+                        }*@
+                        <span>
+                        
+
                         </span>
                     </button>
                 </div>
@@ -184,7 +204,7 @@
                             <li class="navbar-item dropdown-megamenu">
                                 <a class="navbar-link dropdown-arrow"
                                    href="#">category</a>
-                                <div class="megamenu">
+                                <div class="megamenu">-w
                                     <div class="container">
                                         <div class="row row-cols-5">
 
@@ -378,145 +398,8 @@
             <p>All Rights Reserved by <a href="#">Mironcoder</a></p>
         </div>
     </aside>
-    <aside class="cart-sidebar">
-        <div class="cart-header">
-            <div class="cart-total"><i class="fas fa-shopping-basket"></i><span>total item (5)</span></div><button class="cart-close">
-                <i class="icofont-close"></i>
-            </button>
-        </div>
-        <ul class="cart-list">
-            <li class="cart-item">
-                <div class="cart-media">
-                    <a href="#"><img src="~/client/assets/images/product/01.jpg" alt="product"></a><button class="cart-delete">
-                        <i class="far fa-trash-alt"></i>
-                    </button>
-                </div>
-                <div class="cart-info-group">
-                    <div class="cart-info">
-                        <h6><a href="product-single.html">existing product name</a></h6>
-                        <p>Unit Price - $8.75</p>
-                    </div>
-                    <div class="cart-action-group">
-                        <div class="product-action">
-                            <button class="action-minus" title="Quantity Minus">
-                                <i class="icofont-minus"></i>
-                            </button><input class="action-input"
-                                            title="Quantity Number" type="text" name="quantity" value="1"><button class="action-plus" title="Quantity Plus">
-                                <i class="icofont-plus"></i>
-                            </button>
-                        </div>
-                        <h6>$56.98</h6>
-                    </div>
-                </div>
-            </li>
-            <li class="cart-item">
-                <div class="cart-media">
-                    <a href="#"><img src="~/client/assets/images/product/02.jpg" alt="product"></a><button class="cart-delete">
-                        <i class="far fa-trash-alt"></i>
-                    </button>
-                </div>
-                <div class="cart-info-group">
-                    <div class="cart-info">
-                        <h6><a href="product-single.html">existing product name</a></h6>
-                        <p>Unit Price - $8.75</p>
-                    </div>
-                    <div class="cart-action-group">
-                        <div class="product-action">
-                            <button class="action-minus" title="Quantity Minus">
-                                <i class="icofont-minus"></i>
-                            </button><input class="action-input"
-                                            title="Quantity Number" type="text" name="quantity" value="1"><button class="action-plus" title="Quantity Plus">
-                                <i class="icofont-plus"></i>
-                            </button>
-                        </div>
-                        <h6>$56.98</h6>
-                    </div>
-                </div>
-            </li>
-            <li class="cart-item">
-                <div class="cart-media">
-                    <a href="#"><img src="~/client/assets/images/product/03.jpg" alt="product"></a><button class="cart-delete">
-                        <i class="far fa-trash-alt"></i>
-                    </button>
-                </div>
-                <div class="cart-info-group">
-                    <div class="cart-info">
-                        <h6><a href="product-single.html">existing product name</a></h6>
-                        <p>Unit Price - $8.75</p>
-                    </div>
-                    <div class="cart-action-group">
-                        <div class="product-action">
-                            <button class="action-minus" title="Quantity Minus">
-                                <i class="icofont-minus"></i>
-                            </button><input class="action-input"
-                                            title="Quantity Number" type="text" name="quantity" value="1"><button class="action-plus" title="Quantity Plus">
-                                <i class="icofont-plus"></i>
-                            </button>
-                        </div>
-                        <h6>$56.98</h6>
-                    </div>
-                </div>
-            </li>
-            <li class="cart-item">
-                <div class="cart-media">
-                    <a href="#"><img src="~/client/assets/images/product/04.jpg" alt="product"></a><button class="cart-delete">
-                        <i class="far fa-trash-alt"></i>
-                    </button>
-                </div>
-                <div class="cart-info-group">
-                    <div class="cart-info">
-                        <h6><a href="product-single.html">existing product name</a></h6>
-                        <p>Unit Price - $8.75</p>
-                    </div>
-                    <div class="cart-action-group">
-                        <div class="product-action">
-                            <button class="action-minus" title="Quantity Minus">
-                                <i class="icofont-minus"></i>
-                            </button><input class="action-input"
-                                            title="Quantity Number" type="text" name="quantity" value="1"><button class="action-plus" title="Quantity Plus">
-                                <i class="icofont-plus"></i>
-                            </button>
-                        </div>
-                        <h6>$56.98</h6>
-                    </div>
-                </div>
-            </li>
-            <li class="cart-item">
-                <div class="cart-media">
-                    <a href="#"><img src="~/client/assets/images/product/05.jpg" alt="product"></a><button class="cart-delete">
-                        <i class="far fa-trash-alt"></i>
-                    </button>
-                </div>
-                <div class="cart-info-group">
-                    <div class="cart-info">
-                        <h6><a href="product-single.html">existing product name</a></h6>
-                        <p>Unit Price - $8.75</p>
-                    </div>
-                    <div class="cart-action-group">
-                        <div class="product-action">
-                            <button class="action-minus" title="Quantity Minus">
-                                <i class="icofont-minus"></i>
-                            </button><input class="action-input"
-                                            title="Quantity Number" type="text" name="quantity" value="1"><button class="action-plus" title="Quantity Plus">
-                                <i class="icofont-plus"></i>
-                            </button>
-                        </div>
-                        <h6>$56.98</h6>
-                    </div>
-                </div>
-            </li>
-        </ul>
-        <div class="cart-footer">
-            <button class="coupon-btn">Do you have a coupon code?</button>
-            <form class="coupon-form">
-                <input type="text" placeholder="Enter your coupon code"><button type="submit">
-                    <span>apply</span>
-                </button>
-            </form><a class="cart-checkout-btn"
-                      href="checkout.html">
-                <span class="checkout-label">Proceed to Checkout</span><span class="checkout-price">$369.78</span>
-            </a>
-        </div>
+    <aside class="cart-sidebar cart-block">
+               @await Component.InvokeAsync(nameof(MiniBasket))
     </aside>
     <aside class="nav-sidebar">
         <div class="nav-header">
@@ -749,7 +632,9 @@
             </div>
         </div>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="~/client/assets/vendor/bootstrap/jquery-1.12.4.min.js"></script>
+    <script src="~/client/assets/js/Basket.js" asp-append-version="true"></script>
     <script src="~/client/assets/vendor/bootstrap/popper.min.js"></script>
     <script src="~/client/assets/vendor/bootstrap/bootstrap.min.js"></script>
     <script src="~/client/assets/vendor/countdown/countdown.min.js"></script>
@@ -762,6 +647,7 @@
     <script src="~/client/assets/js/venobox.js"></script>
     <script src="~/client/assets/js/slick.js"></script>
     <script src="~/client/assets/js/main.js"></script>
+
 </body>
 <!-- Mirrored from mironmahmud.com/greeny/assets/ltr/blank-page.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 Jun 2023 11:59:28 GMT -->
 

@@ -1,0 +1,60 @@
+﻿@using GrennyWebApplication.Areas.Client.ViewModels.Basket;
+@model List<ProductCookieViewModel>
+
+<div class="cart-header">
+    <div class="cart-total"><i class="fas fa-shopping-basket"></i><span>total item ()</span></div><button class="cart-close">
+        <i class="icofont-close"></i>
+    </button>
+</div>
+<ul class="cart-list">
+    @if (Model is not null)
+    {
+        @foreach (var item in Model)
+        {
+            <li class="cart-item">
+                <div class="cart-media">
+                    <a href="#"><img src="~/@item.ImageUrl" alt="product"></a>
+                    <a asp-route="client-basket-delete" asp-route-productId="@item.Id"></a>
+                    <button class="cart-delete remove-product-to-basket-btn">
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+                </div>
+                <div class="cart-info-group">
+                    <div class="cart-info">
+                        <h6><a href="product-single.html">@item.Title</a></h6>
+                        <p>Unit Price - $@item.Price</p>
+                    </div>
+                    <div class="cart-action-group">
+                        <div class="product-action">
+                            <button class="action-minus" title="Quantity Minus">
+                                <i class="icofont-minus"></i>
+                            </button><input class="action-input"
+                                            title="Quantity Number" type="text" name="quantity" value="@item.Quantity"><button class="action-plus" title="Quantity Plus">
+                                <i class="icofont-plus"></i>
+                            </button>
+                        </div>
+                        <h6>$@item.Total</h6>
+                    </div>
+                </div>
+            </li>
+        }
+    }
+   
+
+</ul>
+<div class="cart-footer">
+    <button class="coupon-btn">Do you have a coupon code?</button>
+    <form class="coupon-form">
+        <input type="text" placeholder="Enter your coupon code"><button type="submit">
+            <span>apply</span>
+        </button>
+    </form><a class="cart-checkout-btn"
+              href="checkout.html">
+        <span class="checkout-label">Proceed to Checkout</span><span class="checkout-price">$
+            @if (Model is not null)
+            {
+                Model.Sum(s => s.Total);
+            }
+        </span>
+    </a>
+</div>

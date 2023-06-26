@@ -40,11 +40,6 @@ namespace GrennyWebApplication.Services.Concretes
              
             return new List<ProductCookieViewModel>();
        
-
-
-
-
-
             //Add product to database if user is authenticated
             async Task AddToDatabaseAsync()
             {
