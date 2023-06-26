@@ -1,4 +1,4 @@
-﻿@using GrennyWebApplication.Areas.Admin.ViewModels.Tag
+﻿@using GrennyWebApplication.Areas.Admin.ViewModels.BlogTag
 
 @model AddViewModel
 <div class="row">
@@ -9,12 +9,12 @@
             </div>
             <div class="card-body">
                 <div class="general-label">
-                    <form method="POST" asp-route="admin-tag-add">
+                    <form method="POST" asp-route="admin-blogtag-add">
 
                         <div class="form-group">
-                            <label asp-for="Name"></label>
-                            <input asp-for="Name" class="form-control">
-                            <span asp-validation-for="Name" class="text-danger"></span>
+                            <label asp-for="Tagname"></label>
+                            <input asp-for="Tagname" class="form-control">
+                            <span asp-validation-for="Tagname" class="text-danger"></span>
                         </div>
                     
                         <button type="submit" class="btn btn-primary">Submit</button>

@@ -1,0 +1,53 @@
+﻿@using GrennyWebApplication.Areas.Admin.ViewModels.City
+@model List<ListViewModel>
+
+<div class="col-lg-12">
+    <div class="row justify-content-end">
+        <div class="">
+            <a asp-controller="city" asp-action="add" target="_blank" class="btn btn-secondary">Add new City</a>
+        </div>
+    </div>
+</div>
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">CIty</h4>
+        </div><!--end card-header-->
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Created</th>
+                            <th>Updated</th>
+                            <th class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var city in Model)
+                        {
+                            <tr>
+                                <td><img style="width:50%;height:50%; border-radius:0" src="~/@city.ImageUrl"></td>
+                                <td>@city.Name</td>
+                                <td>@city.Address</td>
+                                <td>@city.CreatedAt.ToString("dd/MM/yyyy")</td>
+                                <td>@city.UpdatedAt.ToString("dd/MM/yyyy")</td>
+                                <td class="text-end">
+                                    <a asp-route="admin-city-update" asp-route-id="@city.Id"><i class="las la-pen text-secondary font-16"></i></a>
+                                    <form method="POST" asp-route="admin-city-delete" asp-route-id="@city.Id" id="book-form-@city.Id"></form>
+                                    <button type="submit" form="book-form-@city.Id">
+                                        <i class="las la-trash-alt text-secondary font-16"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table><!--end /table-->
+            </div><!--end /tableresponsive-->
+        </div><!--end card-body-->
+    </div><!--end card-->
+</div>
+

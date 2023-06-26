@@ -1,0 +1,40 @@
+﻿@using GrennyWebApplication.Areas.Admin.ViewModels.City
+@model AddViewModel
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">City</h4>
+            </div>
+            <div class="card-body">
+                <div class="general-label">
+                    <form method="POST" asp-route="admin-city-update" asp-route-id="@Model.Id" enctype="multipart/form-data">
+                        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+                        <div class="form-group">
+                            <label asp-for="Name"></label>
+                            <input asp-for="Name" class="form-control" placeholder="Name">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Address"></label>
+                            <input asp-for="Address" class="form-control" placeholder="MainContext">
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Image</label>
+                            <input asp-for="Image" class="form-control">
+                            <span asp-validation-for="Image" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-2">
+                            <input asp-for="ImageUrl" type="hidden">
+                            <img src="~/@Model.ImageUrl" width="20%" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div>
+</div>
