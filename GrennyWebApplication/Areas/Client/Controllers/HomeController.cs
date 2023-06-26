@@ -56,6 +56,9 @@ namespace GrennyWebApplication.Areas.Client.Controllers
                    _fileService.GetFileUrl(f.ProfilePhoteInFileSystem, UploadDirectory.FeedBack)
                     ))
                       .ToListAsync(),
+                GlobalOffers = await _dbContext.Disconts.Take(1).Select(go => new GlobalOfferViewModel(
+                       go.Title,
+                       go.DiscountTime)).ToListAsync()
             };
             return View(model);
         }

@@ -44,6 +44,7 @@ namespace Meridian_Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
+            
             var discount = new Discont
             {
                 Title = model.Title,

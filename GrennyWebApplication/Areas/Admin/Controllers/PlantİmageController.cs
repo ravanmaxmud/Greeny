@@ -50,7 +50,7 @@ namespace GrennyWebApplication.Areas.Admin.Controllers
         [HttpGet("{plantId}/image/add", Name = "admin-plantimg-add")]
         public async Task<IActionResult> AddAsync()
         {
-            return View(new PlantİmageViewModel());
+            return View();
         }
 
         [HttpPost("{plantId}/image/add", Name = "admin-plantimg-add")]
