@@ -36,11 +36,10 @@ namespace GrennyWebApplication.Services.Concretes
             if (_userService.IsAuthenticated)
             {
                 await AddToDatabaseAsync();
-
-                return new List<ProductCookieViewModel>();
             }
              
-            return AddToCookie();
+            return new List<ProductCookieViewModel>();
+       
 
 
 
@@ -72,41 +71,6 @@ namespace GrennyWebApplication.Services.Concretes
                 await _dataContext.SaveChangesAsync();
             }
 
-
-            //Add product to cookie if user is not authenticated 
-            List<ProductCookieViewModel> AddToCookie()
-            {
-                
-                var productCookieValue = _httpContextAccessor.HttpContext.Request.Cookies["products"];
-                var productsCookieViewModel = productCookieValue is not null
-                    ? JsonSerializer.Deserialize<List<ProductCookieViewModel>>(productCookieValue)
-                    : new List<ProductCookieViewModel> { };
-
-                var productCookieViewModel = productsCookieViewModel!.FirstOrDefault(pcvm => pcvm.Id == plant.Id);
-
-                if (productCookieViewModel is null)
-                {
-                    productsCookieViewModel
-                        !.Add(new ProductCookieViewModel(
-                        plant.Id,
-                        plant.Title, 
-                        plant.PlantImages!.Take(1)!.FirstOrDefault()! != null
-                         ? _fileService.GetFileUrl(plant.PlantImages!.Take(1)!.FirstOrDefault()!.ImageNameInFileSystem!, UploadDirectory.Plant)
-                         : string.Empty, 
-                        1, 
-                        plant.Price,
-                        plant.Price));
-                }
-                else
-                {
-                    productCookieViewModel.Quantity += 1;
-                    productCookieViewModel.Total = productCookieViewModel.Quantity * productCookieViewModel.Price;
-                }
-
-                _httpContextAccessor.HttpContext.Response.Cookies.Append("products", JsonSerializer.Serialize(productsCookieViewModel));
-
-                return productsCookieViewModel; 
-            }
         }
     }
 }

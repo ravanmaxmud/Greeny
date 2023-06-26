@@ -58,7 +58,11 @@ namespace GrennyWebApplication.Areas.Client.Controllers
                        go.Title,
                        go.DiscountTime)).ToListAsync(),
 
-                Plants = await _dbContext.Plants.Select(p=> new PlantViewModel(p.Id,p.Title,p.Price,p.DiscountPrice,p.Content)).ToListAsync(),
+                Plants = await _dbContext.Plants.Include(p=> p.PlantImages)
+                .Select(p=> new PlantViewModel(p.Id,p.Title,p.Price,p.DiscountPrice,p.Content, 
+                p.PlantImages.Take(1).FirstOrDefault() != null 
+                ? _fileService.GetFileUrl(p.PlantImages.Take(1).FirstOrDefault().ImageNameInFileSystem,UploadDirectory.Plant):String.Empty
+                )).ToListAsync(),
             };
             return View(model);
         }
