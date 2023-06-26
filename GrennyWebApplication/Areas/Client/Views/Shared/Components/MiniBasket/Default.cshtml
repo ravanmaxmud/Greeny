@@ -49,9 +49,9 @@
             <span>apply</span>
         </button>
     </form><a class="cart-checkout-btn"
-              href="checkout.html">
+              asp-route="client-cart-index">
         <span class="checkout-label">Proceed to Checkout</span><span class="checkout-price">$
-            @if (Model is not null)
+            @if (Model != null)
             {
                 Model.Sum(s => s.Total);
             }

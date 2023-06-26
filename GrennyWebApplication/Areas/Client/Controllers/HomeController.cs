@@ -71,8 +71,8 @@ namespace GrennyWebApplication.Areas.Client.Controllers
         //public async Task<ActionResult> ModalAsync(int id)
         //{
         //    var plant = await _dbContext.Plants.Include(p => p.PlantImages)
-        //        .Include(p => p.PlantColors)
-        //        .Include(p => p.PlantSizes).FirstOrDefaultAsync(p => p.Id == id);
+        //        .Include(p => p.PlantTags)
+        //        .Include(p => p.PlantCatagories).FirstOrDefaultAsync(p => p.Id == id);
 
 
         //    if (plant is null)
@@ -80,7 +80,7 @@ namespace GrennyWebApplication.Areas.Client.Controllers
         //        return NotFound();
         //    }
 
-        //    var model = new ModalViewModel(plant.Id ,plant.Title, plant.Content, plant.Price,
+        //    var model = new ModalViewModel(plant.Id, plant.Title, plant.Content, plant.Price,
         //        plant.PlantImages!.Take(1).FirstOrDefault() != null
         //        ? _fileService.GetFileUrl(plant.PlantImages.Take(1).FirstOrDefault()!.ImageNameInFileSystem, UploadDirectory.Plant)
         //        : String.Empty,
