@@ -58,7 +58,9 @@ namespace GrennyWebApplication.Areas.Client.Controllers
                       .ToListAsync(),
                 GlobalOffers = await _dbContext.Disconts.Take(1).Select(go => new GlobalOfferViewModel(
                        go.Title,
-                       go.DiscountTime)).ToListAsync()
+                       go.DiscountTime)).ToListAsync(),
+                Plants = await _dbContext.Plants.Select(p => new PlantViewModel(p.Id, p.Title, p.Price, p.DiscountPrice, p.Content)).ToListAsync(),
+
             };
             return View(model);
         }

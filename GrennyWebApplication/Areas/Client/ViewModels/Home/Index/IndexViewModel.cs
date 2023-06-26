@@ -6,6 +6,7 @@
         public List<CategoryViewModel> Categories { get; set; }
         public List<GlobalOfferViewModel> GlobalOffers { get; set; }
         public List<FeedBackListItemViewModel> FeedBacks { get; set; }
+        public List<PlantViewModel> Plants { get; set; }
 
     }
 }
