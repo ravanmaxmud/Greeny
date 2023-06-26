@@ -1,12 +1,9 @@
 ﻿using GrennyWebApplication.Areas.Client.ViewModels.Home;
 using GrennyWebApplication.Areas.Client.ViewModels.Home.Index;
-//using GrennyWebApplication.Areas.Client.ViewModels.Home.Modal;
-
 using GrennyWebApplication.Contracts.File;
 using GrennyWebApplication.Database;
 using GrennyWebApplication.Database.Models;
 using GrennyWebApplication.Services.Abstracts;
-//using GrennyWebApplication.Services.Concretes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
