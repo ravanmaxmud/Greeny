@@ -10,6 +10,9 @@
         public List<PlantViewModel> Plants { get; set; }
         public List<BrandViewModel>? Brands { get; set; }
         public List<BlogListItemViewModel>? Blogs { get; set; }
+        public List<BlogCategoryViewModel>? BlogCategories { get; set; }
+        public List<BlogTagViewModel>? BlogTags { get; set; }
+
 
     }
 }
