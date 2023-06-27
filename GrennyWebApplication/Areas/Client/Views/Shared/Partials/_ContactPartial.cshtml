@@ -1,0 +1,39 @@
+﻿﻿@using GrennyWebApplication.Areas.Client.ViewModels.Contact;
+@model ContactViewModel
+
+<form method="POST" class="contact-form" asp-route="client-contact-list">
+    <h4>Drop Your Thoughts</h4>
+    <div class="form-group">
+        <div class="form-input-group">
+            <input asp-for="FirstName" class="form-control" type="text"
+                   placeholder="Your Name"><i class="icofont-user-alt-3"></i>
+            <span asp-validation-for="FirstName"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-input-group">
+            <input asp-for="Email" class="form-control" type="text"
+                   placeholder="Your Email"><i class="icofont-email"></i>
+            <span asp-validation-for="Email"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-input-group">
+            <input asp-for="Subject" class="form-control" type="text"
+                   placeholder="Your Subject"><i class="icofont-book-mark"></i>
+            <span asp-validation-for="Subject"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-input-group">
+            <textarea asp-for="Message" class="form-control"
+                      placeholder="Your Message"></textarea><i class="icofont-paragraph"></i>
+            <span asp-validation-for="Message"></span>
+        </div>
+    </div><button type="submit" class="form-btn-group">
+        <i class="fas fa-envelope"></i><span>
+            send
+            message
+        </span>
+    </button>
+</form>
