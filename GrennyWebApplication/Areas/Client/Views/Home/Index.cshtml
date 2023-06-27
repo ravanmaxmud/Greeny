@@ -39,7 +39,7 @@
             @foreach (var item in Model.Categories)
             {
                 <li>
-                    <a class="suggest-card" href="shop-4column.html">
+                    <a class="suggest-card" asp-route="client-shop-index" asp-route-categoryId="@item.Id">
                         <img src="~/client/assets/images/suggest/01.jpg" alt="suggest">
                         <h5>@item.Title <span>34 items</span></h5>
                     </a>

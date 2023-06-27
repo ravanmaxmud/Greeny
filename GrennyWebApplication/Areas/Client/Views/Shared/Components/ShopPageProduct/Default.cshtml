@@ -1,0 +1,40 @@
+﻿@using GrennyWebApplication.Areas.Client.ViewModels.Home;
+@model List<PlantViewModel>
+
+@foreach (var item in Model)
+{
+    <div class="col">
+        <div class="product-card">
+            <div class="product-media">
+                <div class="product-label"><label class="label-text sale">sale</label></div><button class="product-wish wish">
+                    <i class="fas fa-heart"></i>
+                </button><a class="product-image"
+                            href="product-video.html"><img src="~/@item.ImageUrl" alt="product"></a>
+                <div class="product-widget">
+                    <a title="Product Compare" href="compare.html"
+                       class="fas fa-random"></a><a title="Product Video"
+                                                    href="https://youtu.be/9xzcVxSBbG8" class="venobox fas fa-play" data-autoplay="true"
+                                                    data-vbtype="video"></a><a title="Product View" href="#" class="fas fa-eye"
+                                                                               data-bs-toggle="modal" data-bs-target="#product-view"></a>
+                </div>
+            </div>
+            <div class="product-content">
+                <div class="product-rating">
+                    <i class="active icofont-star"></i><i class="active icofont-star"></i><i class="active icofont-star"></i><i class="active icofont-star"></i><i class="icofont-star"></i><a href="product-video.html">(3)</a>
+                </div>
+                <h6 class="product-name"><a href="product-video.html">@item.Name</a></h6>
+                @if (item.DiscountPrice != null)
+                {
+                    <h6 class="product-price"><del>@item.Price</del><span>$@item.DiscountPrice<small>/piece</small></span></h6>
+                }
+                else
+                {
+                    <h6 class="product-price"><del></del><span>$@item.Price<small>/piece</small></span></h6>
+                }
+                <a asp-route="client-basket-add" asp-route-id="@item.Id" class="product-add add-product-to-basket-btn" title="Add to Cart">
+                    Add
+                </a>
+            </div>
+        </div>
+    </div>
+}

@@ -92,11 +92,21 @@
                         <span>join</span>
                     }
                 </a>
-                <form class="header-form">
+           @*     <form class="header-form">
                     <input type="text" placeholder="Search anything..."><button>
                         <i class="fas fa-search"></i>
                     </button>
-                </form>
+                </form>*@
+
+                @using (Html.BeginForm("Search", "Home", FormMethod.Get, new { @class ="header-form" }))
+                    {
+                    <div class="d-none">
+                        <b>Search By :</b>
+                        @Html.RadioButton("searchBy","Name",true)<text>Name</text>
+                        <br />
+                    </div>
+                    @Html.TextBox("search",null, new { @placeholder = "Search..." ,@class="search-box"})
+                }
                 <div class="header-widget-group">
                     <a href="compare.html" class="header-widget" title="Compare List">
                         <i class="fas fa-random"></i><sup>0</sup>
@@ -217,7 +227,7 @@
                             <li class="navbar-item dropdown">
                                 <a class="navbar-link dropdown-arrow" href="#">pages</a>
                                 <ul class="dropdown-position-list">
-                                    <li><a href="faq.html">faqs</a></li>
+                                    <li><a asp-route="client-shop-index">Sho Page</a></li>
                                     <li><a href="offer.html">offers</a></li>
                                     <li><a href="profile.html">my profile</a></li>
                                     <li><a href="wallet.html">my wallet</a></li>
@@ -647,6 +657,7 @@
     <script src="~/client/assets/js/venobox.js"></script>
     <script src="~/client/assets/js/slick.js"></script>
     <script src="~/client/assets/js/main.js"></script>
+    <script src="~/client/assets/js/ProductFilter.js" asp-append-version="true"></script>
 
 </body>
 <!-- Mirrored from mironmahmud.com/greeny/assets/ltr/blank-page.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 Jun 2023 11:59:28 GMT -->

@@ -100,6 +100,14 @@ namespace GrennyWebApplication.Areas.Client.Controllers
         //    return RedirectToAction("Index", "ShopPage", new { searchBy = searchBy, search = search });
 
         //}
+        [HttpGet("indexsearch", Name = "client-homesearch-index")]
+        public async Task<IActionResult> Search(string searchBy, string search, int? categoryId = null,int? tagId = null)
+        {
+
+            return RedirectToRoute("client-shop-index", new { searchBy = searchBy, search = search, categoryId = categoryId, tagId =tagId});
+
+        }
+
     }
 
 }

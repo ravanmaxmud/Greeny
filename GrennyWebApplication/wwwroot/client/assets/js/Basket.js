@@ -16,7 +16,7 @@
             },
             error: function (err) {
                 $(".product-details-modal").html(err.responseText);
-
+             
             }
 
         });

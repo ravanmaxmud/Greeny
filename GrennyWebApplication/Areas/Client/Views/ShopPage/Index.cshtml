@@ -1,0 +1,179 @@
+﻿@using GrennyWebApplication.Areas.Client.ViewComponents;
+@using GrennyWebApplication.Areas.Client.ViewModels.Home.Index
+@model IndexViewModel
+
+<section class="inner-section single-banner" style="background: url(client/assets/images/single-banner.jpg) no-repeat center;">
+    <div class="container">
+        <h2>Shop 4 Column</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">shop-4column</li>
+        </ol>
+    </div>
+</section>
+
+<section class="inner-section shop-part">
+    <div class="container">
+        <div class="row content-reverse">
+            <div class="col-lg-3">
+                <div class="shop-widget-promo">
+                    <a href="#"><img src="images/promo/shop/01.jpg" alt="promo"></a>
+                </div>
+                <div class="shop-widget">
+                    <h6 class="shop-widget-title">Filter by Price</h6>
+                    <form>
+                        <div class="shop-widget-group">
+                            <input type="text" placeholder="Min - 00"><input type="text"
+                                                                             placeholder="Max - 5k">
+                        </div><button class="shop-widget-btn">
+                            <i class="fas fa-search"></i><span>search</span>
+                        </button>
+                    </form>
+                </div>
+                <div class="shop-widget">
+                    <h6 class="shop-widget-title">Filter by Tag</h6>
+                    <form>
+                        <ul class="shop-widget-list">
+                            @foreach (var item in Model.Tags)
+                            {
+                                <li>
+                                    <div class="shop-widget-content">
+                                        <input disabled type="checkbox" id="cate1"><label for="cate1"></label>
+                                        <a style="color:dimgray;" class="select-tag" asp-route="client-shop-sort" asp-route-tagId="@item.Id">@item.Title</a>
+                                    </div><span class="shop-widget-number">(13)</span>
+                                </li>
+                            }
+
+                        </ul><button class="shop-widget-btn">
+                            <i class="far fa-trash-alt"></i><span>
+                                clear
+                                filter
+                            </span>
+                        </button>
+                    </form>
+                </div>
+                <div class="shop-widget">
+                    <h6 class="shop-widget-title">Filter by Brand</h6>
+                    <form>
+                        <input class="shop-widget-search" type="text" placeholder="Search...">
+                        <ul class="shop-widget-list shop-widget-scroll">
+
+                            @foreach (var item in Model.Brands)
+                            {
+                                <li>
+                                    <div class="shop-widget-content">
+                                        <input disabled type="checkbox" id="cate1"><label for="cate1"></label>
+                                        <a style="color:dimgray;" class="select-brand" asp-route="client-shop-sort" asp-route-tagId="@item.Id">@item.Name</a>
+                                    </div><span class="shop-widget-number">(13)</span>
+                                </li>
+                            }
+
+                        </ul><button class="shop-widget-btn">
+                            <i class="far fa-trash-alt"></i><span>
+                                clear
+                                filter
+                            </span>
+                        </button>
+                    </form>
+                </div>
+                <div class="shop-widget">
+                    <h6 class="shop-widget-title">Filter by Category</h6>
+                    <form>
+                        <input class="shop-widget-search" type="text" placeholder="Search...">
+                        <ul class="shop-widget-list shop-widget-scroll">
+                            @foreach (var item in Model.Categories)
+                            {
+                                <li>
+                                    <div class="shop-widget-content">
+                                        <input disabled type="checkbox" id="cate1"><label for="cate1"></label>
+                                        <a asp-route="client-shop-sort" asp-route-categoryId="@item.Id" class="select-catagory" style="color:dimgray;">
+                                            @item.Title
+                                        </a>
+
+                                    </div><span class="shop-widget-number">()</span>
+                                </li>
+                            }
+
+
+                        </ul><button class="shop-widget-btn">
+                            <i class="far fa-trash-alt"></i><span>
+                                clear
+                                filter
+                            </span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="top-filter">
+                            <div class="filter-show">
+                                <label class="filter-label">Show :</label><select class="form-select filter-select">
+                                    <option value="1">12</option>
+                                    <option value="2">24</option>
+                                    <option value="3">36</option>
+                                </select>
+                            </div>
+                            <div class="filter-short">
+                                <label class="filter-label">Short by :</label>
+                                <a asp-route="client-shop-sort"></a>
+                                <select class="form-select filter-select select-sort">
+                                    <option selected>default</option>
+                                    <option value="1">
+                                        Sort
+                                        By:Name (A - Z)
+                                    </option>
+                                    <option value="2">
+                                        Sort
+                                        By:Name (Z - A)
+                                    </option>
+                                    <option value="3">Newness</option>
+                                    <option value="4">Price: Low to High</option>
+                                    <option value="5">Price: High to Low</option>
+                                </select>
+                            </div>
+                            <div class="filter-action">
+                                <a href="shop-3column.html" title="Three Column">
+                                    <i class="fas fa-th"></i>
+                                </a><a href="shop-2column.html" title="Two Column">
+                                    <i class="fas fa-th-large"></i>
+                                </a><a href="shop-1column.html"
+                                       title="One Column"><i class="fas fa-th-list"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 shopPageProduct">
+
+                    @await Component.InvokeAsync(nameof(ShopPageProduct),new { searchBy = ViewBag.SearchBy, search = ViewBag.Search , categoryId = ViewBag.CategoryId, tagId =  ViewBag.TagId})
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="bottom-paginate">
+                            <p class="page-info">Showing 12 of 60 Results</p>
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#">
+                                        <i class="fas fa-long-arrow-alt-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link active" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">...</li>
+                                <li class="page-item"><a class="page-link" href="#">60</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">
+                                        <i class="fas fa-long-arrow-alt-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
