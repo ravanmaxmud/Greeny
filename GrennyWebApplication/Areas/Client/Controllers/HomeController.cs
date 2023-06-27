@@ -6,6 +6,7 @@ using GrennyWebApplication.Database.Models;
 using GrennyWebApplication.Services.Abstracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace GrennyWebApplication.Areas.Client.Controllers
 {
@@ -25,7 +26,7 @@ namespace GrennyWebApplication.Areas.Client.Controllers
 
         [HttpGet("~/", Name = "client-home-index")]
         [HttpGet("index")]
-        public async  Task<IActionResult> IndexAsync()
+        public async Task<IActionResult> IndexAsync()
         {
             var model = new IndexViewModel
             {
@@ -58,11 +59,17 @@ namespace GrennyWebApplication.Areas.Client.Controllers
                        go.Title,
                        go.DiscountTime)).ToListAsync(),
 
-                Plants = await _dbContext.Plants.Include(p=> p.PlantImages)
-                .Select(p=> new PlantViewModel(p.Id,p.Title,p.Price,p.DiscountPrice,p.Content, 
-                p.PlantImages.Take(1).FirstOrDefault() != null 
-                ? _fileService.GetFileUrl(p.PlantImages.Take(1).FirstOrDefault().ImageNameInFileSystem,UploadDirectory.Plant):String.Empty
+                Plants = await _dbContext.Plants.Include(p => p.PlantImages)
+                .Select(p => new PlantViewModel(p.Id, p.Title, p.Price, p.DiscountPrice, p.Content,
+                p.PlantImages.Take(1).FirstOrDefault() != null
+                ? _fileService.GetFileUrl(p.PlantImages.Take(1).FirstOrDefault().ImageNameInFileSystem, UploadDirectory.Plant) : String.Empty
                 )).ToListAsync(),
+
+
+                Blogs = await _dbContext.Blogs.Include(b => b.BlogTags).Select(b => new BlogListItemViewModel(b.Id, b.Title, b.Description,
+                b.BlogFile!.Take(1)!.FirstOrDefault() != null
+                      ? _fileService.GetFileUrl(b.BlogFile!.Take(1)!.FirstOrDefault()!.FileNameInFileSystem!, UploadDirectory.Blog)
+                       : string.Empty,b.CreatedAt)).ToListAsync(),
             };
             return View(model);
         }
@@ -101,10 +108,10 @@ namespace GrennyWebApplication.Areas.Client.Controllers
 
         //}
         [HttpGet("indexsearch", Name = "client-homesearch-index")]
-        public async Task<IActionResult> Search(string searchBy, string search, int? categoryId = null,int? tagId = null)
+        public async Task<IActionResult> Search(string searchBy, string search, int? categoryId = null, int? tagId = null)
         {
 
-            return RedirectToRoute("client-shop-index", new { searchBy = searchBy, search = search, categoryId = categoryId, tagId =tagId});
+            return RedirectToRoute("client-shop-index", new { searchBy = searchBy, search = search, categoryId = categoryId, tagId = tagId });
 
         }
 

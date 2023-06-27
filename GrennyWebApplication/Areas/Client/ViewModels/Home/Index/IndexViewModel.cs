@@ -9,6 +9,7 @@
         public List<FeedBackListItemViewModel> FeedBacks { get; set; }
         public List<PlantViewModel> Plants { get; set; }
         public List<BrandViewModel>? Brands { get; set; }
+        public List<BlogListItemViewModel>? Blogs { get; set; }
 
     }
 }

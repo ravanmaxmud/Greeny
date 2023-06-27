@@ -67,8 +67,8 @@ namespace GrennyWebApplication.Areas.Admin.Controllers
             }
             order.Status = model.Status;
 
-            var stausMessageDto = PrepareStausMessage(order.User.Email);
-            _emailService.Send(stausMessageDto);
+            //var stausMessageDto = PrepareStausMessage(order.User.Email);
+            //_emailService.Send(stausMessageDto);
             await _dataContext.SaveChangesAsync();
 
             return RedirectToRoute("admin-order-list");

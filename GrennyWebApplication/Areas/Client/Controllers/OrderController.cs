@@ -1,5 +1,6 @@
 ﻿using GrennyWebApplication.Areas.Client.ViewModels.Order;
 using GrennyWebApplication.Database;
+using GrennyWebApplication.Database.Models;
 using GrennyWebApplication.Services.Abstracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,35 +24,66 @@ namespace GrennyWebApplication.Areas.Client.Controllers
             _userService = userService;
             _orderService = orderService;
         }
-
-        [HttpGet("checkout", Name = "client-order-checkout")]
-        public async Task<IActionResult> CheckOut()
+        [HttpPost("placeorder", Name = "client-order-placeorder")]
+        public async Task<IActionResult> PlaceOrder()
         {
-            if (!_userService.IsAuthenticated)
+            var basketProducts = await _dbContext.BasketProducts.Include(p => p.Plant)
+                .Where(p => p.Basket.UserId == _userService.CurrentUser.Id).ToListAsync();
+
+            var order = await CreateOrder();
+
+            await CreateFullOrderProductAync(order, basketProducts);
+            order.Total = order.OrderProducts!.Sum(p => p.Total);
+
+            await ResetBasketAsync(basketProducts);
+
+            await _dbContext.SaveChangesAsync();
+
+            return RedirectToRoute("client-home-index");
+
+
+            async Task ResetBasketAsync(List<BasketProduct> basketProducts)
             {
-                return RedirectToRoute("client-auth-login");
+                await Task.Run(() => _dbContext.RemoveRange(basketProducts));
             }
 
-            var model = new OrderProductsViewModel
+            async Task CreateFullOrderProductAync(Order order, List<BasketProduct> basketProducts)
             {
-                Products = await _dbContext.BasketProducts
-              .Where(p => p.Basket.UserId == _userService.CurrentUser.Id)
-                .Select(p => new OrderProductsViewModel.ListItem
+                foreach (var item in basketProducts)
                 {
-                    Name = p.Plant.Title,
-                    Price = p.Plant.Price,
-                    Quantity = p.Quantity,
-                    Total = p.Plant.Price * (decimal)p.Quantity!,
-                }).ToListAsync(),
+                    var orderProduct = new OrderProduct
+                    {
+                        OrderId = order.Id,
+                        PlantId = item.PlantId,
+                        Price = item.Plant.Price!,
+                        Quantity = (int)item.Quantity!,
+                        Total = item.Plant.Price * (decimal)item.Quantity,
+                   
 
-                Summary = new OrderProductsViewModel.SummaryTotal
-                {
-                    Total = await _dbContext.BasketProducts
-                 .Where(pu => pu.Basket!.UserId == _userService.CurrentUser.Id)
-                  .SumAsync(bp => bp.Plant!.Price * (decimal)bp.Quantity!)
+                    };
+                    await _dbContext.OrderProducts.AddAsync(orderProduct);
                 }
-            };
-            return View(model);
+
+            }
+
+            async Task<Order> CreateOrder()
+            {
+                var order = new Order
+                {
+                    Id = await _orderService.GenerateUniqueTrackingCodeAsync(),
+                    UserId = _userService.CurrentUser.Id,
+                    Status = Database.Models.Enums.OrderStatus.Created,
+                    CreatedAt = DateTime.Now,
+
+                };
+                await _dbContext.Orders.AddAsync(order);
+
+
+
+                return order;
+
+
+            }
         }
     }
 }
