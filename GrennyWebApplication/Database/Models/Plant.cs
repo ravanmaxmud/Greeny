@@ -13,6 +13,7 @@ namespace GrennyWebApplication.Database.Models
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public List<PlantTag>? PlantTags { get; set; }
+        public List<Comment>? Comments { get; set; }
         public List<PlantImage>? PlantImages { get; set; }
         public List<PlantCatagory>? PlantCatagories { get; set; }
         public List<BasketProduct>? BasketProducts { get; set; }
