@@ -24,7 +24,7 @@ namespace GrennyWebApplication.Areas.Admin.Controllers
         public async Task<IActionResult> ListAsync()
         {
             var model = await _dataContext.Contacts
-                .Select(c => new ListContactViewModel(c.FirstName, c.LastName, c.Phone, c.Email, c.Message))
+                .Select(c => new ListContactViewModel(c.FirstName, c.Subject, c.Email, c.Message))
                 .ToListAsync();
 
             return View(model);
