@@ -23,6 +23,7 @@ namespace GrennyWebApplication.Services.Concretes
         private readonly IUrlHelper _urlHelper;
         private readonly DateTime _activationExpireDate;
         private const string EMAIL_CONFIRMATION_ROUTE_NAME = "client-auth-activate";
+        private const string PASSWORD_CHANGE_TOKEN = "client-auth-forgetPasswordToken";
 
 
         public UserActivationService(
@@ -56,6 +57,17 @@ namespace GrennyWebApplication.Services.Concretes
 
             _emailService.Send(activationMessageDto);
         }
+        public async Task SendChangePasswordUrlAsync(User user)
+        {
+            ArgumentNullException.ThrowIfNull(user);
+
+            var token = GenerateActivationToken();
+            var activationUrl = GenerateUrl(token, PASSWORD_CHANGE_TOKEN);
+            await CreatePasswordForgetAsync(user, token, activationUrl, _activationExpireDate);
+            var activationMessageDto = PrepareChangePasswordMessage(user.Email!, activationUrl);
+
+            _emailService.Send(activationMessageDto);
+        }
 
 
         private string GenerateActivationToken()
@@ -83,6 +95,20 @@ namespace GrennyWebApplication.Services.Concretes
 
             return userActivation;
         }
+        private async Task<PasswordForget> CreatePasswordForgetAsync(User user, string token, string activationUrL, DateTime expireDate)
+        {
+            var passwordForget = new PasswordForget
+            {
+                User = user,
+                ActivationToken = token,
+                ActivationUrl = activationUrL,
+                ExpiredDate = expireDate,
+            };
+
+            await _dataContext.PasswordForgets.AddAsync(passwordForget);
+
+            return passwordForget;
+        }
 
         private MessageDto PrepareActivationMessage(string email, string activationUrl)
         {
@@ -90,6 +116,15 @@ namespace GrennyWebApplication.Services.Concretes
                 .Replace(EmailMessageKeywords.ACTIVATION_URL, activationUrl);
 
             string subject = EmailMessages.Subject.ACTIVATION_MESSAGE;
+
+            return new MessageDto(email, subject, body);
+        }
+        private MessageDto PrepareChangePasswordMessage(string email, string activationUrl)
+        {
+            string body = EmailMessages.Body.CHANGEPASSWORD_MESSAGE
+                .Replace(EmailMessageKeywords.CHANGEPASSWORD_URL, activationUrl);
+
+            string subject = EmailMessages.Subject.CHANGEPASSWORD_MESSAGE;
 
             return new MessageDto(email, subject, body);
         }

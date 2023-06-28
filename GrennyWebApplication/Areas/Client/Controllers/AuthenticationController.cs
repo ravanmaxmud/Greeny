@@ -100,6 +100,60 @@ namespace GrennyWebApplication.Areas.Client.Controllers
         }
 
 
+        [HttpGet("forgetPasswordToken/{token}", Name = "client-auth-forgetPasswordToken")]
+        public async Task<IActionResult> ForgetPasswordToken([FromRoute] string token)
+        {
+            var forgetPassword = await _dbContext.PasswordForgets.Include(u => u.User)
+                .FirstOrDefaultAsync(u => u.ActivationToken == token);
+
+            if (forgetPassword is null)
+            {
+                return NotFound("Forget Password Token Not Found");
+            }
+
+            if (DateTime.Now > forgetPassword.ExpiredDate)
+            {
+                return Ok("Token expired olub teessufler");
+            }
+
+
+            return RedirectToRoute("client-auth-changePassword", new { token = token });
+        }
+
+        [HttpGet("changePassword", Name = "client-auth-changePassword")]
+        public async Task<IActionResult> ChangePassword(string token)
+        {
+            var model = new ChangePasswordViewModel
+            {
+                Token = token
+            };
+            return View(model);
+        }
+        [HttpPost("changePassword", Name = "client-auth-changePassword")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            var forgetPassword = await _dbContext.PasswordForgets.Include(u => u.User)
+             .FirstOrDefaultAsync(u => u.ActivationToken == model.Token);
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == forgetPassword.UserId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            user.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
+
+            await _dbContext.SaveChangesAsync();
+
+            return RedirectToRoute("client-auth-login");
+        }
+
+
 
         //[HttpGet("activate/{token}", Name = "client-auth-activate")]
         //public async Task<IActionResult> Activate([FromRoute] string token)

@@ -14,6 +14,7 @@ namespace GrennyWebApplication.Database
 
         }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<PasswordForget> PasswordForgets { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<TeamMember> TeamMembers { get; set; }
         public DbSet<Brand> Brands { get; set; }

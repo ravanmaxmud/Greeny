@@ -20,6 +20,7 @@ namespace GrennyWebApplication.Database.Models
         public UserActivation? UserActivation { get; set; }
 
         public List<Order>? Orders { get; set; }
+        public List<PasswordForget>? PasswordForget { get; set; }
 
     }
 }
