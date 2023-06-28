@@ -20,7 +20,7 @@ namespace GrennyWebApplication.Areas.Admin.Controllers
     [Area("admin")]
     [Route("admin/User")]
     [Authorize(Roles = "admin")]
-    //[Authorize(Roles = "admin")]
+
     public class UserController : Controller
     {
 

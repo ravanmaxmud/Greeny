@@ -6,20 +6,20 @@ namespace GrennyWebApplication.Areas.Client.ViewModels.PlantDetails
 {
     public class PlantDetailsViewModel
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public decimal Price { get; set; }
+        public int? Id { get; set; }
+        public string? Title { get; set; }
+        public string? Description { get; set; }
+        public decimal? Price { get; set; }
         public decimal? DiscountPrice { get; set; }
-        public int InStock { get; set; }
+        public int? InStock { get; set; }
 
         public string? Name { get; set; }
         public string? Context { get; set; }
         public string? Email { get; set; }
         public List<CommentViewModel>? Comment { get; set; }
-        public List<ImageViewModeL> Images { get; set; }
-        public List<DiscountList> Discounts { get; set; }
-        public List<PlantListItemViewModel> Products { get; set; }
+        public List<ImageViewModeL>? Images { get; set; }
+        public List<DiscountList>? Discounts { get; set; }
+        public List<PlantListItemViewModel>? Products { get; set; }
 
 
 

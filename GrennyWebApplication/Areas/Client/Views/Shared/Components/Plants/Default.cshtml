@@ -9,9 +9,9 @@
                 <div class="product-label"><label class="label-text sale">sale</label></div><button class="product-wish wish">
                     <i class="fas fa-heart"></i>
                 </button><a class="product-image"
-                            href="product-video.html"><img src="~/@item.ImageUrl" alt="product"></a>
+                        asp-route="client-plantdetails-index" asp-route-id="@item.Id">><img src="~/@item.ImageUrl" alt="product"></a>
                 <div class="product-widget">
-                    <a title="Product Compare" href="compare.html"
+                    <a title="Product Compare" asp-route="client-plantdetails-index" asp-route-id="@item.Id"
                        class="fas fa-random"></a><a title="Product Video"
                                                     href="https://youtu.be/9xzcVxSBbG8" class="venobox fas fa-play" data-autoplay="true"
                                                     data-vbtype="video"></a><a title="Product View" href="#" class="fas fa-eye"
