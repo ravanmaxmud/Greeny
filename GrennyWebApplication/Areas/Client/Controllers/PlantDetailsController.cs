@@ -1,4 +1,5 @@
-﻿using GrennyWebApplication.Areas.Client.ViewModels.Home;
+﻿using GrennyWebApplication.Areas.Client.ViewModels.Comment;
+using GrennyWebApplication.Areas.Client.ViewModels.Home;
 using GrennyWebApplication.Areas.Client.ViewModels.Home.Index;
 using GrennyWebApplication.Areas.Client.ViewModels.PlantDetails;
 using GrennyWebApplication.Contracts.File;
@@ -7,6 +8,7 @@ using GrennyWebApplication.Database.Models;
 using GrennyWebApplication.Services.Abstracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata;
 using static GrennyWebApplication.Areas.Client.ViewModels.Home.Index.PlantListItemViewModel;
 
 namespace GrennyWebApplication.Areas.Client.Controllers
@@ -24,7 +26,7 @@ namespace GrennyWebApplication.Areas.Client.Controllers
             _fileService = fileService;
         }
         [HttpGet("index/{id}", Name = "client-plantdetails-index")]
-        public async Task<IActionResult> IndexAsync(int id)
+        public async Task<IActionResult> Index(int id)
         {
             var product = await _dbContext.Plants
                 .Include(p => p.PlantImages)
@@ -68,8 +70,10 @@ namespace GrennyWebApplication.Areas.Client.Controllers
                     pc.Plant.PlantCatagories.Select(pc => new CategoriesList(pc.Category.Title)).ToList(),
                     pc.Plant.PlantImages.Take(1).FirstOrDefault() != null
                    ? _fileService.GetFileUrl(pc.Plant.PlantImages.Take(1).FirstOrDefault().ImageNameInFileSystem, UploadDirectory.Plant)
-                   : String.Empty
+                : String.Empty
+
                )).ToListAsync(),
+                Comment = _dbContext.Comments.Where(p => p.PlantId == product.Id).Select(bc => new CommentViewModel(bc.Id, bc.Name, bc.Email, bc.Context, bc.CreatedAt)).ToList(),
 
             };
 

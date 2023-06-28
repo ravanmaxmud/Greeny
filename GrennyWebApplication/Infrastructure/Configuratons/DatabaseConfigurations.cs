@@ -10,7 +10,7 @@ namespace GrennyWebApplication.Infrastructure.Configurations
         {
             services.AddDbContext<DataContext>(o =>
             {
-                o.UseSqlServer(configuration.GetConnectionString("AliPC"));
+                o.UseSqlServer(configuration.GetConnectionString("RamilPc"));
             });
         }
     }
