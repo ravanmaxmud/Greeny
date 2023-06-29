@@ -562,11 +562,9 @@ namespace GrennyWebApplication.Migrations
 
             modelBuilder.Entity("GrennyWebApplication.Database.Models.PasswordForget", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ActivationToken")
                         .HasColumnType("nvarchar(max)");

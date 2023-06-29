@@ -2,7 +2,7 @@
 
 namespace GrennyWebApplication.Database.Models
 {
-    public class PasswordForget : BaseEntity<int>,IAuditable
+    public class PasswordForget : BaseEntity<Guid>,IAuditable
     {
         public string? ActivationUrl { get; set; }
         public string? ActivationToken { get; set; }

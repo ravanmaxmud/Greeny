@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GrennyWebApplication.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230628120451_AddComment")]
-    partial class AddComment
+    [Migration("20230629161325_All")]
+    partial class All
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -563,6 +563,37 @@ namespace GrennyWebApplication.Migrations
                     b.ToTable("OrderProducts");
                 });
 
+            modelBuilder.Entity("GrennyWebApplication.Database.Models.PasswordForget", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ActivationToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ActivationUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ExpiredDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("PasswordForgets");
+                });
+
             modelBuilder.Entity("GrennyWebApplication.Database.Models.Plant", b =>
                 {
                     b.Property<int>("Id")
@@ -1096,6 +1127,17 @@ namespace GrennyWebApplication.Migrations
                     b.Navigation("Plant");
                 });
 
+            modelBuilder.Entity("GrennyWebApplication.Database.Models.PasswordForget", b =>
+                {
+                    b.HasOne("GrennyWebApplication.Database.Models.User", "User")
+                        .WithMany("PasswordForget")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("GrennyWebApplication.Database.Models.PlantBrand", b =>
                 {
                     b.HasOne("GrennyWebApplication.Database.Models.Brand", "Brand")
@@ -1270,6 +1312,8 @@ namespace GrennyWebApplication.Migrations
                     b.Navigation("Basket");
 
                     b.Navigation("Orders");
+
+                    b.Navigation("PasswordForget");
 
                     b.Navigation("UserActivation");
                 });

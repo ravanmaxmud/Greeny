@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GrennyWebApplication.Migrations
 {
     /// <inheritdoc />
-    public partial class Password : Migration
+    public partial class All : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,30 +15,29 @@ namespace GrennyWebApplication.Migrations
                 name: "PasswordForgets",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ActivationUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ActivationToken = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ExpiredDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    UserId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PasswordForgets", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PasswordForgets_Users_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_PasswordForgets_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_PasswordForgets_UserId1",
+                name: "IX_PasswordForgets_UserId",
                 table: "PasswordForgets",
-                column: "UserId1");
+                column: "UserId");
         }
 
         /// <inheritdoc />
