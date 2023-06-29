@@ -83,6 +83,7 @@ namespace GrennyWebApplication.Areas.Client.Controllers
                 _logger.LogWarning($"({model.Email}) This Email Address is already un use.");
                 return View(model);
             }
+
             var emails = new List<string>();
             emails.Add(model.Email);
 
