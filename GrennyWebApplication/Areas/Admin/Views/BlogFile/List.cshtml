@@ -57,7 +57,7 @@
                                 <td>@blogFile.IsShowVideo</td>
                                 <td>@blogFile.IsShowImage</td>
                                 <td class="text-end">
-                                    <a asp-route="admin-blogfile-update" asp-route-id="@blogFile.Id"><i class="las la-pen text-secondary font-16"></i></a>
+                                 
                                     <form method="POST" asp-route="admin-blogfile-delete" asp-route-blogId="@Model.Blogİd" asp-route-blogFileId="@blogFile.Id" id="book-image-form-@blogFile.Id"></form>
                                     <button type="submit" form="book-image-form-@blogFile.Id">
                                         <i class="las la-trash-alt text-secondary font-16"></i>

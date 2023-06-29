@@ -47,7 +47,7 @@
                                 <td>@plantImage.CreatedAt.ToString("dd/MM/yyyy")</td>
                                 <td class="text-end">
                                     <a asp-route="admin-plantimg-update" asp-route-id="@plantImage.Id"><i class="las la-pen text-secondary font-16"></i></a>
-                                    <form method="POST" asp-route="admin-plantimg-delete" asp-route-productId="@Model.PlantId" asp-route-plantImageId="@plantImage.Id" id="book-image-form-@plantImage.Id"></form>
+                                    <form method="POST" asp-route="admin-plantimg-delete" asp-route-plantId="@Model.PlantId" asp-route-plantImageId="@plantImage.Id" id="book-image-form-@plantImage.Id"></form>
                                     <button type="submit" form="book-image-form-@plantImage.Id">
                                         <i class="las la-trash-alt text-secondary font-16"></i>
                                     </button>
