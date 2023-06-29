@@ -102,7 +102,7 @@ namespace GrennyWebApplication.Areas.Admin.Controllers
 
             await _dataContext.SaveChangesAsync();
 
-            return RedirectToRoute("admin-productimg-list", new { plantId = plantId });
+            return RedirectToRoute("admin-plantimg-list", new { plantId = plantId });
 
         }
     } 

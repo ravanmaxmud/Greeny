@@ -17,29 +17,39 @@
     <div class="container">
         <div class="row">
 
-            @foreach (var img in Model.Images)
-            {
+            
+          
 
                 <div class="col-lg-6">
                     <div class="details-gallery">
                         <div class="details-label-group">
-                            <label class="details-label new">new</label><label class="details-label off"></label>
+                            <label class="details-label new">new</label><label class="details-label off">SALE</label>
                         </div>
 
-
+                   
+                    
 
                         <ul class="details-preview">
-                            <li><img src="~/@img.ImageUrl" alt="product"></li>
+                        @foreach (var img in Model.Images)
+                        {
+                         <li><img src="~/@img.ImageUrl" alt="product"></li>
+                            
+                        }
 
                         </ul>
                         <ul class="details-thumb">
+                        @foreach (var img in Model.Images)
+                        {
                             <li><img src="~/@img.ImageUrl" alt="product"></li>
 
+                        }
+
                         </ul>
+                    
 
                     </div>
                 </div>
-            }
+            
             <div class="col-lg-6">
                 <ul class="product-navigation">
                     <li class="product-nav-prev">
