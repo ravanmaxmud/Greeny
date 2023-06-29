@@ -101,6 +101,37 @@ namespace GrennyWebApplication.Areas.Client.Controllers
         }
 
 
+        [HttpGet("forgetPassword", Name = "client-auth-forgetPassword")]
+        public async Task<IActionResult> ForgetPassword()
+        {
+            return View();
+        }
+        [HttpPost("forgetPassword", Name = "client-auth-forgetPassword")]
+        public async Task<IActionResult> ForgetPassword(ForgetPasswordViewModel model)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
+
+            if (user is null)
+            {
+                ModelState.AddModelError(String.Empty, "Email is not correct");
+                _logger.LogWarning($"({model.Email}) This Email is not correct.");
+                return View(model);
+            }
+
+            await _userActivationService.SendChangePasswordUrlAsync(user);
+            await _dbContext.SaveChangesAsync();
+
+            return RedirectToRoute("client-home-index");
+        }
+
+
+
+
         [HttpGet("forgetPasswordToken/{token}", Name = "client-auth-forgetPasswordToken")]
         public async Task<IActionResult> ForgetPasswordToken([FromRoute] string token)
         {
