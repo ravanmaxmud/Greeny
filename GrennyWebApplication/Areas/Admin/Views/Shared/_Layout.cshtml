@@ -1,9 +1,12 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using GrennyWebApplication.Services.Abstracts
+@inject IUserService userService
+@using GrennyWebApplication.Areas.Client.ViewComponents;
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Metrica - Admin & Dashboard Template</title>
+    <title>Greeny Admin - Powered by Metrica </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="" name="author" />
@@ -28,7 +31,7 @@
     <!-- leftbar-tab-menu -->
     <div class="leftbar-tab-menu">
         <div class="main-icon-menu">
-            <a href="index.html" class="logo logo-metrica d-block text-center">
+            <a asp-controller="dashboard" asp-action="index" class="logo logo-metrica d-block text-center">
                 <span>
                     <img src="~/admin/assets/images/logo-sm.png" alt="logo-small" class="logo-sm" asp-append-version="true">
                 </span>
@@ -44,24 +47,12 @@
                     </ul><!--end nav-->
                 </div><!--end /div-->
             </div><!--end main-icon-menu-body-->
-            <div class="pro-metrica-end">
-                <a href="" class="profile">
-                    <img src="~/admin/assets/images/users/user-4.jpg" alt="profile-user" class="rounded-circle thumb-sm" asp-append-version="true">
-                </a>
-            </div><!--end pro-metrica-end-->
+
         </div>
         <!--end main-icon-menu-->
 
         <div class="main-menu-inner">
             <!-- LOGO -->
-            <div class="topbar-left">
-                <a href="index.html" class="logo">
-                    <span>
-                        <img src="~/admin/assets/images/logo-dark.png" alt="logo-large" class="logo-lg logo-dark" asp-append-version="true">
-                        <img src="~/admin/assets/images/logo.png" alt="logo-large" class="logo-lg logo-light" asp-append-version="true">
-                    </span>
-                </a><!--end logo-->
-            </div><!--end topbar-left-->
             <!--end logo-->
             <div class="menu-body navbar-vertical tab-content" data-simplebar>
                 <div id="MetricaDashboard" class="main-icon-menu-pane tab-pane" role="tabpanel"
@@ -86,6 +77,7 @@
                         <li class="nav-item">
                             <a asp-route="admin-category-list" class="nav-link">Category</a>
                         </li><!--end nav-item-->
+                        <li class="nav-item">
                             <a asp-route="admin-tag-list" class="nav-link">Tag</a>
                         </li><!--end nav-item-->
                         <li class="nav-item">
@@ -126,76 +118,34 @@
         </div><!-- end main-menu-inner-->
     </div>
     <!-- end leftbar-tab-menu-->
-
     <!-- Top Bar Start -->
     <div class="topbar">
         <!-- Navbar -->
         <nav class="navbar-custom" id="navbar-custom">
             <ul class="list-unstyled topbar-nav float-end mb-0">
                 <li class="dropdown">
-                    <a class="nav-link dropdown-toggle arrow-none nav-icon" data-bs-toggle="dropdown" href="#" role="button"
-                       aria-haspopup="false" aria-expanded="false">
-                        <img src="~/admin/assets/images/flags/us_flag.jpg" alt="" class="thumb-xxs rounded-circle" asp-append-version="true">
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#"><img src="~/admin/assets/images/flags/us_flag.jpg" alt="" height="15" class="me-2" asp-append-version="true">English</a>
-                        <a class="dropdown-item" href="#"><img src="~/admin/assets/images/flags/spain_flag.jpg" alt="" height="15" class="me-2" asp-append-version="true">Spanish</a>
-                        <a class="dropdown-item" href="#"><img src="~/admin/assets/images/flags/germany_flag.jpg" alt="" height="15" class="me-2" asp-append-version="true">German</a>
-                        <a class="dropdown-item" href="#"><img src="~/admin/assets/images/flags/french_flag.jpg" alt="" height="15" class="me-2" asp-append-version="true">French</a>
-                    </div>
-                </li><!--end topbar-language-->
-
-                <li class="dropdown notification-list">
-                    <a class="nav-link dropdown-toggle arrow-none nav-icon" data-bs-toggle="dropdown" href="#" role="button"
-                       aria-haspopup="false" aria-expanded="false">
-                        <i class="ti ti-bell"></i>
-                        <span class="alert-badge"></span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end dropdown-lg pt-0">
-
-                       
-                        <h6 class="dropdown-item-text font-15 m-0 py-3 border-bottom d-flex justify-content-between align-items-center">
-                            Notifications <span class="badge bg-soft-primary badge-pill"></span>
-                        </h6>
-
-                        <div class="notification-menu" id="notification-menu" data-simplebar>
-
-                        </div>
-                        
-                        <!-- All-->
-                        <a href="javascript:void(0);" class="dropdown-item text-center text-primary">
-                            View all <i class="fi-arrow-right"></i>
-                        </a>
-                    </div>
-                </li>
-
-                <li class="dropdown">
                     <a class="nav-link dropdown-toggle nav-user" data-bs-toggle="dropdown" href="#" role="button"
                        aria-haspopup="false" aria-expanded="false">
                         <div class="d-flex align-items-center">
-                            <img src="~/admin/assets/images/users/user-4.jpg" alt="profile-user" class="rounded-circle me-2 thumb-sm" asp-append-version="true" />
+                            <img src="~/client/assets/images/user.png" alt="profile-user" class="rounded-circle me-2 thumb-sm" asp-append-version="true" />
                             <div>
-                                <small class="d-none d-md-block font-11">Admin</small>
-                                <span class="d-none d-md-block fw-semibold font-12">
-                                    Maria Gibson <i class="mdi mdi-chevron-down"></i>
-                                </span>
-                                <a class="btn bnt-primary" asp-route="admin-auth-logout">LogOut</a>
+                                <small class="d-none d-md-block font-11">Current Client :</small>
+                                @if (userService.IsAuthenticated)
+                                {
+                                    <span class="d-none d-md-block fw-semibold font-12">
+
+                                        @userService.CurrentUser.FirstName  @userService.CurrentUser.LastName
+                                        <i class="mdi mdi-chevron-down"></i>
+                                    </span>
+                                }
                             </div>
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end">
-                        <a class="dropdown-item" href="#"><i class="ti ti-user font-16 me-1 align-text-bottom"></i> Profile</a>
-                        <a class="dropdown-item" href="#"><i class="ti ti-settings font-16 me-1 align-text-bottom"></i> Settings</a>
-                        <div class="dropdown-divider mb-0"></div>
-                        <a class="dropdown-item" href="#"><i class="ti ti-power font-16 me-1 align-text-bottom"></i> Logout</a>
+                        <a class="dropdown-item" asp-route="client-auth-logout"><i class="ti ti-power font-16 me-1 align-text-bottom"></i> Logout</a>
                     </div>
                 </li><!--end topbar-profile-->
-                
-                <li class="notification-list">
-                    <a class="nav-link arrow-none nav-icon offcanvas-btn" href="#" data-bs-toggle="offcanvas" data-bs-target="#Appearance" role="button" aria-controls="Rightbar">
-                        <i class="ti ti-settings ti-spin"></i>
-                    </a>
-                </li>
+
             </ul><!--end topbar-nav-->
 
             <ul class="list-unstyled topbar-nav mb-0">
@@ -204,12 +154,7 @@
                         <i class="ti ti-menu-2"></i>
                     </button>
                 </li>
-                <li class="hide-phone app-search">
-                    <form role="search" action="#" method="get">
-                        <input type="search" name="search" class="form-control top-search mb-0" placeholder="Type text...">
-                        <button type="submit"><i class="ti ti-search"></i></button>
-                    </form>
-                </li>
+
             </ul>
         </nav>
         <!-- end navbar-->

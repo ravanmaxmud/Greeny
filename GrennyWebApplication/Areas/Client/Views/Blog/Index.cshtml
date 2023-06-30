@@ -52,25 +52,20 @@
                                     <ul class="blog-meta">
                                         <li><i class="icofont-ui-calendar"></i><span>@item.CreatedAt.ToString("dd/MMM/yyyy")</span></li>
                                         <li><i class="icofont-user-alt-3"></i><span>Admin</span></li>
-                                        <li><i class="icofont-speech-comments"></i><span>25 comments</span></li>
+                                        <li><i class="icofont-speech-comments"></i><span> comments</span></li>
                                     </ul>
                                     <h4 class="blog-title">
                                         <a href="blog-details.html">
-                                             @item.Title
+                                            @item.Title
                                         </a>
                                     </h4>
                                     <p class="blog-desc">
-                                          @item.Description
-                                    </p><a class="blog-btn" href="blog-details.html">
-                                        <span>
-                                            read
-                                            more
-                                        </span><i class="icofont-arrow-right"></i>
-                                    </a>
+                                        @item.Description
+                                    </p>
                                 </div>
                             </div>
                         }
-                       
+
                     </div>
                     <div class="col-lg-12">
                         <div class="bottom-paginate">
@@ -106,42 +101,20 @@
                 <div class="blog-widget">
                     <h3 class="blog-widget-title">popular feeds</h3>
                     <ul class="blog-widget-feed">
-                        <li>
-                            <a class="blog-widget-media" href="#">
-                                <img src="images/blog-widget/01.jpg"
-                                     alt="blog-widget">
-                            </a>
-                            <h6 class="blog-widget-text">
-                                <a href="#">
-                                    Lorem ipsum dolor sit amet
-                                    consectetur
-                                </a><span>february 02, 2021</span>
-                            </h6>
-                        </li>
-                        <li>
-                            <a class="blog-widget-media" href="#">
-                                <img src="images/blog-widget/02.jpg"
-                                     alt="blog-widget">
-                            </a>
-                            <h6 class="blog-widget-text">
-                                <a href="#">
-                                    Lorem ipsum dolor sit amet
-                                    consectetur
-                                </a><span>february 02, 2021</span>
-                            </h6>
-                        </li>
-                        <li>
-                            <a class="blog-widget-media" href="#">
-                                <img src="images/blog-widget/03.jpg"
-                                     alt="blog-widget">
-                            </a>
-                            <h6 class="blog-widget-text">
-                                <a href="#">
-                                    Lorem ipsum dolor sit amet
-                                    consectetur
-                                </a><span>february 02, 2021</span>
-                            </h6>
-                        </li>
+                        @foreach (var item in Model.Blogs)
+                        {
+                            <li>
+                                <a class="blog-widget-media" href="#">
+                                    <img src="~/@item.FileUrl"
+                                         alt="blog-widget">
+                                </a>
+                                <h6 class="blog-widget-text">
+                                    <a href="#">
+                                        @item.Title
+                                    </a><span>february 02, 2021</span>
+                                </h6>
+                            </li>
+                        }
                     </ul>
                 </div>
                 <div class="blog-widget">
@@ -172,12 +145,7 @@
                         <li><a href="#" class="icofont-instagram"></a></li>
                     </ul>
                 </div>
-                <div class="blog-widget">
-                    <a href="#">
-                        <img class="img-fluid" src="images/promo/blog/01.jpg"
-                             alt="promo">
-                    </a>
-                </div>
+
             </div>
         </div>
     </div>

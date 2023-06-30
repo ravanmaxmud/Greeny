@@ -1,6 +1,8 @@
 ﻿@using GrennyWebApplication.Areas.Client.ViewComponents;
 @using GrennyWebApplication.Areas.Client.ViewModels.Basket;
 @model List<ProductCookieViewModel>
+@using GrennyWebApplication.Services.Abstracts
+@inject IUserService userService
 
 <section class="inner-section single-banner" style="background: url(client/assets/images/single-banner.jpg) no-repeat center;">
     <div class="container">
@@ -17,9 +19,20 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="alert-info">
-                    <p>Returning customer? <a href="login.html">Click here to login</a></p>
-                </div>
+                @if (userService.IsAuthenticated)
+                {
+                    <div class="alert-info">
+                        <p>Have a good day!</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert-info">
+                        <p>Returning customer? <a asp-controller="authentication" asp-action="login">Click here to login</a></p>
+                    </div>
+
+                }
+
             </div>
             <div class="col-lg-12">
                 <div class="account-card">
@@ -57,7 +70,6 @@
                         </div>
                         <div class="checkout-charge">
                             <ul>
-
                             </ul>
                         </div>
                     </div>
@@ -273,9 +285,9 @@
                                 checkout
                             </button>
                         </form>
-                       @* <a asp-route="client-order-placeorder" class="btn btn-inline">
-                            proced to
-                            checkout
+                        @* <a asp-route="client-order-placeorder" class="btn btn-inline">
+                        proced to
+                        checkout
                         </a>*@
                     </div>
                 </div>

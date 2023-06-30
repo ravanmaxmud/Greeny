@@ -13,30 +13,30 @@
             <div class="col-lg-12">
                 <div class="account-card">
                     <div class="account-title">
-                        <h4>Your Profile</h4><button data-bs-toggle="modal" data-bs-target="#profile-edit">
-                            edit
-                            profile
-                        </button>
+                        <h4>Your Profile</h4><a asp-controller="authentication" asp-action="forgetPassword" class="btn btn-outline-success">
+                            Change
+                            Password
+                        </a>
                     </div>
                     <div class="account-content">
                         <div class="row">
                             <div class="col-lg-2">
-                                <div class="profile-image">
-                                    <a href="#"><img src="images/user.png" alt="user"></a>
+                                <div class="profile-image mt-3">
+                                    <a><img src="~/client/assets/images/user.png" alt="user" style="border-radius:50%"></a>
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group">
-                                    <label class="form-label">name</label><input class="form-control" type="text" value="@ViewBag.Name @ViewBag.LastName">
+                                    <label class="form-label">name</label><input class="form-control" disabled type="text" value="@ViewBag.Name @ViewBag.LastName">
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group">
-                                    <label class="form-label">Email</label><input class="form-control" type="email" value="@ViewBag.Email">
+                                    <label class="form-label">Email</label><input class="form-control" disabled type="email" value="@ViewBag.Email">
                                 </div>
                             </div>
-                            <div class="col-lg-2">
-                                <div class="profile-btn"><a asp-route="client-auth-logout">Log Out.</a></div>
+                            <div class="col-md-2 col-lg-2 mt-4">
+                                <div class="profile-btn btn btn-success"><a style="color:white" asp-route="client-auth-logout">Log Out.</a></div>
                             </div>
                         </div>
                     </div>
@@ -178,7 +178,7 @@
                         <div class="row">
                             <div class="col-md-6 col-lg-4 alert fade show">
                                 <div class="payment-card payment active">
-                                    <img src="images/payment/png/01.png"
+                                    <img src="~/client/assets/images/payment/png/01.png"
                                          alt="payment">
                                     <h4>card number</h4>
                                     <p><span>****</span><span>****</span><span>****</span><sup>1876</sup></p>
@@ -188,7 +188,7 @@
                             </div>
                             <div class="col-md-6 col-lg-4 alert fade show">
                                 <div class="payment-card payment">
-                                    <img src="images/payment/png/02.png"
+                                    <img src="~/client/assets/images/payment/png/02.png"
                                          alt="payment">
                                     <h4>card number</h4>
                                     <p><span>****</span><span>****</span><span>****</span><sup>1876</sup></p>
@@ -198,7 +198,7 @@
                             </div>
                             <div class="col-md-6 col-lg-4 alert fade show">
                                 <div class="payment-card payment">
-                                    <img src="images/payment/png/03.png"
+                                    <img src="~/client/assets/images/payment/png/03.png"
                                          alt="payment">
                                     <h4>card number</h4>
                                     <p><span>****</span><span>****</span><span>****</span><sup>1876</sup></p>

@@ -107,16 +107,13 @@
                         </ul>
                     </div>
                     <div class="details-add-group">
-                        <button class="product-add" title="Add to Cart">
-                            <i class="fas fa-shopping-basket"></i><span>add to cart</span>
-                        </button>
+                        <a asp-route="client-basket-add" asp-route-id="@Model.Id" class="product-add add-product-to-basket-btn" title="Add to Cart">
+                           Add ToCart
+                        </a>
                         <div class="product-action">
-                            <button class="action-minus" title="Quantity Minus">
-                                <i class="icofont-minus"></i>
-                            </button><input class="action-input"
-                                            title="Quantity Number" type="text" name="quantity" value="1"><button class="action-plus" title="Quantity Plus">
-                                <i class="icofont-plus"></i>
-                            </button>
+                            <a asp-route="client-basket-add" asp-route-id="@Model.Id"  class="btn btn-success add-product-to-basket-btn" title="Add to Cart">
+                                Add ToCart
+                            </a>
                         </div>
                     </div>
                     <div class="details-action-group">

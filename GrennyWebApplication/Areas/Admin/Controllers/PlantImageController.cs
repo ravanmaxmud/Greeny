@@ -1,6 +1,4 @@
-﻿
-
-using GrennyWebApplication.Areas.Admin.ViewModels.Plantİmage;
+﻿using GrennyWebApplication.Areas.Admin.ViewModels.Plantİmage;
 using GrennyWebApplication.Contracts.File;
 using GrennyWebApplication.Database;
 using GrennyWebApplication.Database.Models;
@@ -28,7 +26,7 @@ namespace GrennyWebApplication.Areas.Admin.Controllers
         }
         #region List
         [HttpGet("{pLantId}/image/list", Name = "admin-plantimg-list")]
-        public async Task<IActionResult> ListAsync([FromRoute] int plantId)
+        public async Task<IActionResult> List([FromRoute] int plantId)
         {
             var plant = await _dataContext.Plants.Include(p => p.PlantImages).FirstOrDefaultAsync(p => p.Id == plantId);
             if (plant == null) return NotFound();
@@ -48,7 +46,7 @@ namespace GrennyWebApplication.Areas.Admin.Controllers
 
         #region Add
         [HttpGet("{plantId}/image/add", Name = "admin-plantimg-add")]
-        public async Task<IActionResult> AddAsync()
+        public async Task<IActionResult> Add()
         {
             return View();
         }
@@ -80,7 +78,7 @@ namespace GrennyWebApplication.Areas.Admin.Controllers
 
             return RedirectToRoute("admin-plantimg-list", new { plantId = plantId });
 
-        } 
+        }
         #endregion
 
         #region Delete
@@ -105,6 +103,6 @@ namespace GrennyWebApplication.Areas.Admin.Controllers
             return RedirectToRoute("admin-plantimg-list", new { plantId = plantId });
 
         }
-    } 
+    }
     #endregion
 }

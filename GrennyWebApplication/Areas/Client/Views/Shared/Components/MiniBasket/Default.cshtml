@@ -1,5 +1,9 @@
 ﻿@using GrennyWebApplication.Areas.Client.ViewModels.Basket;
+@using GrennyWebApplication.Services.Concretes;
 @model List<ProductCookieViewModel>
+@using GrennyWebApplication.Services.Abstracts
+@inject IUserService userService
+@using GrennyWebApplication.Areas.Client.ViewComponents;
 
 <div class="cart-header">
     <div class="cart-total"><i class="fas fa-shopping-basket"></i><span>total item ()</span></div><button class="cart-close">
@@ -39,7 +43,7 @@
             </li>
         }
     }
-   
+
 
 </ul>
 <div class="cart-footer">
@@ -48,13 +52,28 @@
         <input type="text" placeholder="Enter your coupon code"><button type="submit">
             <span>apply</span>
         </button>
-    </form><a class="cart-checkout-btn"
-              asp-route="client-cart-index">
-        <span class="checkout-label">Proceed to Checkout</span><span class="checkout-price">$
-            @if (Model != null)
-            {
-                Model.Sum(s => s.Total);
-            }
-        </span>
-    </a>
+    </form>
+    @if (userService.IsAuthenticated)
+    {
+        <a class="cart-checkout-btn"
+           asp-route="client-cart-index">
+
+            <span class="checkout-label">Proceed to Checkout</span>
+
+            <span class="checkout-price">
+                $
+                @if (Model != null)
+                {
+                    Model.Sum(s => s.Total);
+                }
+            </span>
+        </a>
+    }
+    else
+    {
+        <a class="cart-checkout-btn" asp-controller="authentication" asp-action="login">
+            <span class="checkout-label">Please Login First</span>
+        </a>
+
+    }
 </div>
